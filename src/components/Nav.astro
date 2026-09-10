@@ -45,7 +45,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
   .hdr { background: var(--c-surface); border-bottom: 1px solid var(--c-border); position: sticky; top: 0; z-index: 20; }
   .hdr__in { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-block: 16px; }
 
-  .logo { display: block; text-decoration: none; }
+  .logo { display: flex; align-items: center; min-height: 44px; text-decoration: none; }
   .logo__ph {
     display: grid; place-items: center; width: 152px; height: 38px;
     background: #dde1dc; border: 1px solid #c6ccc5; border-radius: 6px;

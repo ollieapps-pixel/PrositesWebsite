@@ -54,13 +54,17 @@ import { site, contact, nav, footerTrades } from '../data/site';
   .ftr__list a:hover { color: var(--c-orange); text-decoration: underline; }
   .social { display: flex; gap: 10px; list-style: none; margin: 0; padding: 0; }
   .social a {
-    display: grid; place-items: center; width: 40px; height: 40px;
+    display: grid; place-items: center; width: 44px; height: 44px;
     border-radius: var(--r-pill); background: #1b211f; color: var(--c-orange);
   }
   .social a:hover { background: #262d2a; }
   .ftr__bottom {
     border-top: 1px solid #222826; padding: 22px 0 40px;
     font-size: 0.9rem; color: #6e7674;
+  }
+  @media (max-width: 560px) {
+    .ftr__list { line-height: 1.5; }
+    .ftr__list a { display: inline-flex; align-items: center; min-height: 44px; }
   }
   @media (max-width: 900px) { .ftr__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; } }
   @media (max-width: 560px) { .ftr__grid { grid-template-columns: minmax(0, 1fr); } .ftr__bottom { padding-bottom: 104px; } }
