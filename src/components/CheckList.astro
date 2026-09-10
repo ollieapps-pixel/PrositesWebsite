@@ -1,0 +1,19 @@
+---
+import Tick from './Tick.astro';
+import Cross from './Cross.astro';
+interface Props { items: readonly string[]; tone?: 'tick' | 'cross' | 'amber'; class?: string; }
+const { items, tone = 'tick', class: cls = '' } = Astro.props;
+---
+<ul class:list={['cl', cls]}>
+  {items.map((t) => (
+    <li class="cl__i">
+      {tone === 'cross' ? <Cross /> : <Tick stroke={tone === 'amber' ? 'var(--c-amber)' : 'var(--c-orange)'} />}
+      <span set:html={t} />
+    </li>
+  ))}
+</ul>
+<style>
+  .cl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .cl__i { display: flex; gap: 11px; align-items: flex-start; font-size: 1rem; line-height: 1.5; color: var(--c-ink-2); }
+  :global(.on-petrol) .cl__i { color: var(--c-on-dark-3); }
+</style>

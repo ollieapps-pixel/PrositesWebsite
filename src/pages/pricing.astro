@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import Plan from '../components/Plan.astro';
+import AddOns from '../components/AddOns.astro';
+import CheckList from '../components/CheckList.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import CallBar from '../components/CallBar.astro';
+import { meta, faqs } from '../data/content';
+
+const terms = [
+  '50% deposit to begin, balance due on launch',
+  'EFT or payment link',
+  'Monthly plan starts on launch day',
+  '30 days&rsquo; notice to cancel the monthly plan',
+  'You own your domain and website files',
+];
+const dont = [
+  'Social media management',
+  'E-commerce stores',
+  'Full-service marketing retainers',
+  'Websites for anyone outside the home service trades',
+];
+---
+
+<Base title={meta.pricing.title} description={meta.pricing.description}>
+
+  <section class="phero on-petrol">
+    <div class="wrap stack" style="gap:18px; max-width:860px">
+      <h1>One fixed price for the website and the job app</h1>
+      <p>Published up front. No discovery call needed before you know what it costs.</p>
+    </div>
+  </section>
+
+  <section class="sec wrap stack" style="gap:34px">
+    <Plan />
+    <AddOns />
+  </section>
+
+  <section class="band">
+    <div class="sec wrap split">
+      <div class="stack" style="gap:18px">
+        <h2>Payment terms</h2>
+        <CheckList items={terms} />
+      </div>
+      <div class="stack" style="gap:18px">
+        <h2>What we don&rsquo;t do</h2>
+        <CheckList items={dont} tone="cross" />
+        <p class="lede">We&rsquo;re deliberately narrow. We build websites and job management software for home service businesses and keep them running. If you need something outside that, we&rsquo;ll tell you honestly and point you somewhere else.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap faq-wrap">
+    <h2>Questions</h2>
+    <Faq items={faqs} />
+  </section>
+
+  <CtaBand />
+  <CallBar />
+</Base>
+
+<style>
+  .phero { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4rem); }
+  .phero h1 { color: #fff; text-wrap: balance; }
+  .band { background: var(--c-surface); border-block: 1px solid var(--c-border); }
+  .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; align-items: start; }
+  @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+  .faq-wrap { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 60px; align-items: start; }
+  @media (max-width: 900px) { .faq-wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+</style>

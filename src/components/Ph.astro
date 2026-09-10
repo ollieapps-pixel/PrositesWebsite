@@ -1,0 +1,17 @@
+---
+/** Marked placeholder block for imagery that has not been supplied yet. */
+interface Props { label: string; ratio?: string; dark?: boolean; class?: string; }
+const { label, ratio = '16 / 10', dark = false, class: cls = '' } = Astro.props;
+---
+<div class:list={['ph', { 'ph--dark': dark }, cls]} style={`aspect-ratio:${ratio}`} role="img" aria-label={`Placeholder: ${label}`}>
+  <span>{label}</span>
+</div>
+<style>
+  .ph {
+    display: grid; place-items: center; width: 100%;
+    background: #dde1dc; border: 1px solid #c6ccc5; border-radius: var(--r-md);
+  }
+  .ph span { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; color: #6c756b; text-align: center; padding: 0 12px; }
+  .ph--dark { background: #14524f; border-color: #1f6663; }
+  .ph--dark span { color: #7fa9a6; }
+</style>

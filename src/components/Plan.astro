@@ -1,0 +1,51 @@
+---
+import Button from './Button.astro';
+import CheckList from './CheckList.astro';
+import { pricing } from '../data/site';
+import { buildsList, runsList } from '../data/content';
+---
+<div class="plan">
+  <div class="plan__head">
+    <div class="stack" style="gap:6px">
+      <span class="eyebrow">THE PROSITES SYSTEM</span>
+      <p class="plan__sub">Your website and your job app, together</p>
+    </div>
+    <div class="plan__prices">
+      <div><span class="plan__n">{pricing.once}</span><span class="plan__l">once-off, to build it</span></div>
+      <i></i>
+      <div><span class="plan__n plan__n--amber">{pricing.monthly}</span><span class="plan__l">per month, to run it</span></div>
+    </div>
+  </div>
+  <div class="plan__body">
+    <div class="stack" style="gap:14px">
+      <h3>What the {pricing.once} builds</h3>
+      <CheckList items={buildsList} />
+    </div>
+    <div class="stack" style="gap:14px">
+      <h3>What the {pricing.monthly} a month runs</h3>
+      <CheckList items={runsList} />
+    </div>
+  </div>
+  <div class="plan__foot">
+    <Button href="/start/">Get Started</Button>
+    <p class="fine">50% deposit to start, balance on launch. You own your website and your domain. Cancel the monthly plan any time with 30 days&rsquo; notice.</p>
+  </div>
+</div>
+
+<style>
+  .plan { border: 1px solid var(--c-border); border-radius: 20px; box-shadow: 0 8px 30px rgba(13,27,26,0.09); overflow: hidden; background: var(--c-surface); }
+  .plan__head { background: var(--c-petrol); padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .plan__sub { font-size: 1.3rem; font-weight: 600; color: var(--c-on-dark); }
+  .plan__prices { display: flex; align-items: flex-end; gap: 30px; }
+  .plan__prices i { width: 1px; height: 56px; background: var(--c-petrol-line); }
+  .plan__prices > div { display: flex; flex-direction: column; gap: 3px; }
+  .plan__n { font-size: clamp(2.25rem, 1.9rem + 1.5vw, 2.875rem); font-weight: 800; letter-spacing: -0.03em; color: #fff; line-height: 1; }
+  .plan__n--amber { color: var(--c-amber); }
+  .plan__l { font-size: var(--t-small); font-weight: 600; color: var(--c-on-dark-2); }
+  .plan__body { padding: 34px 40px 30px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+  .plan__body h3 { font-size: 1.0625rem; font-weight: 800; }
+  .plan__foot { padding: 0 40px 34px; display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+  .fine { font-size: var(--t-small); line-height: 1.6; color: var(--c-muted-2); flex: 1 1 320px; }
+  @media (max-width: 900px) { .plan__body { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+  @media (max-width: 640px) { .plan__head, .plan__body, .plan__foot { padding-inline: 22px; } }
+</style>

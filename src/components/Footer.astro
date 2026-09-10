@@ -1,0 +1,67 @@
+---
+import { site, contact, nav, footerTrades } from '../data/site';
+---
+<footer class="ftr">
+  <div class="wrap ftr__grid">
+    <div class="stack" style="gap:16px">
+      <span class="ftr__logo">LOGO</span>
+      <p class="ftr__blurb">{site.description}</p>
+      <ul class="social" aria-label="Social links">
+        <li><a href="#" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.29-.04-1.27-.13-2.41-.13-2.38 0-4.01 1.45-4.01 4.13v2.3H7.6V13h2.67v8z"/></svg></a></li>
+        <li><a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/></svg></a></li>
+        <li><a href={contact.whatsappHref} aria-label="WhatsApp"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 2a7.8 7.8 0 1 1-4 14.5l-.4-.2-2.5.6.7-2.4-.3-.4A7.8 7.8 0 0 1 12 4.2z"/></svg></a></li>
+      </ul>
+    </div>
+
+    <div class="stack" style="gap:14px">
+      <h2 class="ftr__h">Pages</h2>
+      <ul class="ftr__list">{nav.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+    </div>
+
+    <div class="stack" style="gap:14px">
+      <h2 class="ftr__h">Contact</h2>
+      <ul class="ftr__list">
+        <li><a href={contact.phoneHref}>{contact.phone}</a></li>
+        <li><a href={contact.emailHref}>{contact.email}</a></li>
+        <li><a href={contact.whatsappHref}>WhatsApp</a></li>
+        <li><span>{site.city}, {site.region}</span></li>
+      </ul>
+    </div>
+
+    <div class="stack" style="gap:14px">
+      <h2 class="ftr__h">Trades</h2>
+      <ul class="ftr__list">{footerTrades.map((t) => <li><span>{t}</span></li>)}</ul>
+    </div>
+  </div>
+  <div class="wrap ftr__bottom">© {new Date().getFullYear()} {site.name}. All rights reserved.</div>
+</footer>
+
+<style>
+  .ftr { background: var(--c-carbon); color: var(--c-on-carbon); }
+  .ftr__grid {
+    display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.2fr; gap: 48px;
+    padding: 62px 0 32px;
+  }
+  .ftr__logo {
+    display: grid; place-items: center; width: 150px; height: 38px;
+    background: #14524f; border: 1px solid #1f6663; border-radius: 6px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #7fa9a6;
+  }
+  .ftr__blurb { font-size: 0.97rem; line-height: 1.6; color: var(--c-on-carbon); }
+  .ftr__h { font-size: 0.9375rem; font-weight: 800; color: #fff; }
+  .ftr__list { list-style: none; margin: 0; padding: 0; font-size: 0.97rem; line-height: 1.95; }
+  .ftr__list a, .ftr__list span { color: var(--c-on-carbon); text-decoration: none; }
+  .ftr__list a:hover { color: var(--c-orange); text-decoration: underline; }
+  .social { display: flex; gap: 10px; list-style: none; margin: 0; padding: 0; }
+  .social a {
+    display: grid; place-items: center; width: 40px; height: 40px;
+    border-radius: var(--r-pill); background: #1b211f; color: var(--c-orange);
+  }
+  .social a:hover { background: #262d2a; }
+  .ftr__bottom {
+    border-top: 1px solid #222826; padding: 22px 0 40px;
+    font-size: 0.9rem; color: #6e7674;
+  }
+  @media (max-width: 900px) { .ftr__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; } }
+  @media (max-width: 560px) { .ftr__grid { grid-template-columns: minmax(0, 1fr); } .ftr__bottom { padding-bottom: 104px; } }
+</style>

@@ -1,0 +1,17 @@
+---
+import { pricing } from '../data/site';
+---
+<div class="addons">
+  <h2>Add-ons, if you want them</h2>
+  <ul class="addons__l">
+    {pricing.addOns.map((a) => <li><span>{a.label}</span><strong>{a.price}</strong></li>)}
+    <li><span>Google Ads, managed — see <a href="/get-found/">Get Found</a></span><strong>from {pricing.ads}/mo</strong></li>
+  </ul>
+</div>
+<style>
+  .addons { background: var(--c-amber-bg); border: 1px solid var(--c-amber-border); border-radius: var(--r-lg); padding: 24px 28px; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; align-items: center; }
+  .addons h2 { font-size: 1.1875rem; font-weight: 800; }
+  .addons__l { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 40px; }
+  .addons__l li { display: flex; justify-content: space-between; gap: 16px; font-size: 1rem; }
+  @media (max-width: 900px) { .addons { grid-template-columns: minmax(0, 1fr); gap: 18px; } .addons__l { grid-template-columns: minmax(0, 1fr); } }
+</style>

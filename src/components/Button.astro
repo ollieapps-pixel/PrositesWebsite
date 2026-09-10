@@ -1,0 +1,48 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'ghost' | 'onDark' | 'whatsapp';
+  size?: 'md' | 'sm';
+  class?: string;
+}
+const { href, variant = 'primary', size = 'md', class: cls = '' } = Astro.props;
+---
+<a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`, cls]}>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-block;
+    border-radius: var(--r-pill);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn--md { font-size: 1rem; padding: 15px 30px; }
+  .btn--sm { font-size: 0.9375rem; padding: 12px 24px; }
+
+  .btn--primary { background: var(--c-orange); color: #fff; box-shadow: var(--sh-orange); }
+  .btn--primary:hover { background: var(--c-orange-hover); color: #fff; transform: translateY(-1px); }
+
+  .btn--ghost {
+    background: var(--c-surface); color: var(--c-ink);
+    border: 1px solid var(--c-border-strong);
+  }
+  .btn--ghost:hover { background: var(--c-surface-alt); color: var(--c-ink); }
+
+  .btn--onDark {
+    background: transparent; color: #f2f2ec;
+    border: 2px solid rgba(242, 242, 236, 0.5);
+    padding: 13px 28px;
+  }
+  .btn--onDark:hover { background: rgba(242, 242, 236, 0.1); color: #fff; }
+
+  .btn--whatsapp { background: var(--c-whatsapp); color: #fff; }
+  .btn--whatsapp:hover { background: #17904a; color: #fff; }
+
+  @media (max-width: 520px) {
+    .btn { display: block; width: 100%; }
+  }
+</style>

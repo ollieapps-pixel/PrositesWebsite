@@ -1,0 +1,31 @@
+---
+import { contact } from '../data/site';
+---
+<div class="callbar">
+  <a class="callbar__b callbar__b--call" href={contact.phoneHref}>
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.4 3h3.3l1.6 4-2.1 1.5a12.6 12.6 0 0 0 6.1 6.1l1.5-2.1 4 1.6v3.3a1.6 1.6 0 0 1-1.8 1.6C10.9 18.2 6.2 13.5 4.8 4.8A1.6 1.6 0 0 1 6.4 3z"/></svg>
+    <span>Call now</span>
+  </a>
+  <a class="callbar__b callbar__b--wa" href={contact.whatsappHref}>
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2zm0 2a7.8 7.8 0 1 1-4 14.5l-.4-.2-2.5.6.7-2.4-.3-.4A7.8 7.8 0 0 1 12 4.2z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+</div>
+
+<style>
+  .callbar {
+    position: fixed; inset: auto 0 0 0; z-index: 30; display: none; gap: 10px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: var(--c-surface); border-top: 1px solid #e0e4df;
+    box-shadow: 0 -6px 20px rgba(13, 27, 26, 0.1);
+  }
+  .callbar__b {
+    flex: 1 1 0; display: flex; align-items: center; justify-content: center; gap: 9px;
+    min-height: 48px; border-radius: var(--r-pill); color: #fff;
+    font-size: 1.0625rem; font-weight: 700; text-decoration: none;
+  }
+  .callbar__b--call { background: var(--c-orange); }
+  .callbar__b--wa { background: var(--c-whatsapp); }
+  @media (max-width: 560px) { .callbar { display: flex; } }
+</style>

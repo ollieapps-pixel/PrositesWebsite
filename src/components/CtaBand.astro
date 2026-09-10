@@ -1,0 +1,29 @@
+---
+import Button from './Button.astro';
+interface Props { heading?: string; body?: string; primary?: { href: string; label: string }; secondary?: { href: string; label: string }; }
+const {
+  heading = 'Ready to stop losing jobs to your competitors?',
+  body = 'Tell us about your business in one short form. We reply within a working day with your start date — no meeting, no proposal document.',
+  primary = { href: '/start/', label: 'Start Your Brief' },
+  secondary = { href: '/pricing/', label: 'View Pricing' },
+} = Astro.props;
+---
+<section class="cta">
+  <div class="wrap cta__in">
+    <div class="stack" style="gap:8px">
+      <h2 class="cta__h">{heading}</h2>
+      <p class="lede">{body}</p>
+    </div>
+    <div class="cta__btns">
+      <Button href={primary.href}>{primary.label}</Button>
+      <Button href={secondary.href} variant="ghost">{secondary.label}</Button>
+    </div>
+  </div>
+</section>
+<style>
+  .cta { background: var(--c-surface-alt); border-top: 1px solid var(--c-border); }
+  .cta__in { padding-block: 44px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .cta__h { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 1.75rem); }
+  .cta__btns { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  @media (max-width: 520px) { .cta__btns { width: 100%; } }
+</style>

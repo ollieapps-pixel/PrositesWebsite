@@ -1,0 +1,210 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import CheckList from '../components/CheckList.astro';
+import Faq from '../components/Faq.astro';
+import CallBar from '../components/CallBar.astro';
+import { meta } from '../data/content';
+import { pricing, contact } from '../data/site';
+
+const adsWork = [
+  'Build and run the campaigns, by service and by suburb',
+  'Write the ads and keep the wasteful searches out',
+  'Point every ad at the right page on your site',
+  'Track calls and form enquiries so you know what a job cost to win',
+  'One plain-language WhatsApp update a month — no dashboards to log into',
+];
+const seoWork = [
+  'Look after your Google Business Profile — the thing that actually drives local calls',
+  'Add a new service area page each month, so you cover more suburbs',
+  'Add a page for each service, written the way customers describe the problem',
+  'Chase up reviews and get them onto your site and profile',
+  'Keep the technical side clean as the site grows',
+];
+const forWho = [
+  'ProSites clients with a site already live',
+  'Trades who can take on more work than they are getting',
+  'Anyone expanding into a new suburb and starting from nothing there',
+];
+const dont = [
+  'Promise you page one, or a number of leads',
+  'Charge a percentage of your ad spend',
+  'Tie you into a six or twelve month contract',
+  'Send you a twenty page report you will not read',
+  'Social media management, or marketing retainers of any kind',
+];
+const gfFaqs = [
+  { q: 'How much should I spend on ads to start?', a: '[ANSWER NEEDED — suggest a realistic starting budget for a Cape Town trade, and what a call typically costs.]' },
+  { q: 'How long before I see anything from the search work?', a: 'Give it six months before you judge it. You should see movement in your Google Business Profile sooner than that, but ranking for competitive terms is slow by nature.' },
+  { q: 'Can I stop the ads for a month if I am busy?', a: 'Yes. Ads pause whenever you want and you stop paying Google immediately. Give us 30 days on the management fee.' },
+  { q: 'Who owns the Google Ads account? [ANSWER NEEDED]', a: '[ANSWER NEEDED — this is the question that separates you from the agencies he has dealt with. Confirm the account is his and travels with him.]' },
+  { q: 'Do I have to take both? [ANSWER NEEDED]', a: '[ANSWER NEEDED — confirm whether ads and search can be bought separately or only together.]' },
+];
+---
+
+<Base title={meta.getFound.title} description={meta.getFound.description}>
+
+  <section class="phero on-petrol">
+    <div class="wrap stack" style="gap:22px; max-width:860px">
+      <span class="eyebrow">For ProSites clients whose site is already live</span>
+      <h1>Your site is live. Now let&rsquo;s make the phone ring.</h1>
+      <p>A good website turns a search into a call. Get Found is what puts you in front of more of those searches — Google Ads when you need calls this week, and search work when you want them every month. Fixed monthly price. Cancel with 30 days&rsquo; notice.</p>
+      <div class="btns">
+        <Button href={contact.whatsappHref}>Talk to us on WhatsApp</Button>
+        <Button href="#prices" variant="onDark">See the Prices</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="honest">
+    <div class="wrap honest__in">
+      <h2>First, the honest version</h2>
+      <div class="stack" style="gap:16px">
+        <p>Nobody can put you at the top of Google, and you should be sceptical of anyone who says they can. What actually drives calls for a trade in Cape Town is a properly built site, a Google Business Profile that is set up and looked after, and — if you want calls faster than that — paid ads.</p>
+        <p><strong>Ranking for competitive terms takes ongoing work over months. Ads work in days but stop the moment you stop paying. Both are true, and which one you want depends on how quickly you need the work.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap split">
+    <div class="stack" style="gap:18px">
+      <span class="kicker">GOOGLE ADS — CALLS THIS WEEK</span>
+      <h2>Pay to be first while you earn your way up</h2>
+      <p class="lede">When someone types &ldquo;burst geyser Durbanville&rdquo; into their phone, the first three results are ads. We put you there, pointed at the suburbs you actually cover, with the ad sending them to a page about that one job — not your homepage.</p>
+      <p class="lede">You pay Google directly for the ad spend, so you can see exactly what you spent. We charge a fixed monthly fee to run it. No percentage of spend, because that only rewards us for spending more of your money.</p>
+    </div>
+    <div class="card panel">
+      <h3>What we do each month</h3>
+      <CheckList items={adsWork} />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec wrap split">
+      <div class="card panel panel--alt">
+        <h3>What we do each month</h3>
+        <CheckList items={seoWork} />
+      </div>
+      <div class="stack" style="gap:18px">
+        <span class="kicker">SEARCH — CALLS EVERY MONTH</span>
+        <h2>The slow one that keeps paying</h2>
+        <p class="lede">Your site was already built to be found. This is the ongoing work on top of it: more suburbs covered, more services written up properly, and a Google Business Profile that stays active instead of going stale the week after launch.</p>
+        <p class="lede">It is slower than ads and it does not switch off when you stop paying. Most trades who do both start with ads for the cash flow and let the search work build underneath.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap stack" style="gap:36px">
+    <div class="stack center" style="gap:12px">
+      <h2>The enquiry doesn&rsquo;t stop at your website</h2>
+      <p class="lede measure">This is the part an agency can&rsquo;t do for you: we built the site and the app, so a paid click becomes a job on your dashboard without anything being retyped.</p>
+    </div>
+    <div class="grid g-3">
+      <div class="card loop"><span class="kicker">1</span><h3>Someone searches, and finds you</h3><p class="lede">Your ad or your service area page comes up for the job they need doing, in the suburb they&rsquo;re standing in.</p></div>
+      <div class="card loop"><span class="kicker">2</span><h3>They call or fill in the form</h3><p class="lede">Tap-to-call, WhatsApp or the quote form — whichever they reach for first.</p></div>
+      <div class="card loop"><span class="kicker">3</span><h3>It lands in your job app</h3><p class="lede">The enquiry opens as a job with the customer&rsquo;s details already on it. You can see what you spent to win it.</p></div>
+    </div>
+  </section>
+
+  <section class="band" id="prices">
+    <div class="sec wrap stack" style="gap:34px">
+      <div class="stack center" style="gap:12px">
+        <h2>Fixed monthly. Cancel with 30 days.</h2>
+        <p class="lede measure">No retainers, no hours, no percentage of your ad spend. Add either one to your {pricing.monthly} a month, or both.</p>
+      </div>
+      <div class="grid g-2" style="align-items:start">
+        <div class="tier">
+          <span class="kicker">GOOGLE ADS, MANAGED</span>
+          <p class="tier__p"><span class="tier__n">{pricing.ads}</span><span class="tier__u">per month</span></p>
+          <p class="tier__x">plus your ad spend, paid straight to Google</p>
+          <p class="lede">For when you need the phone ringing now — a quiet month, a new suburb, or a service you want more of.</p>
+          <p class="fine">Suggested starting ad spend {pricing.suggestedSpend} a month. You set the limit and you can change it whenever you like.</p>
+          <Button href={contact.whatsappHref} variant="ghost">Ask about Ads</Button>
+        </div>
+        <div class="tier tier--dark">
+          <span class="eyebrow">SEARCH, ONGOING</span>
+          <p class="tier__p"><span class="tier__n" style="color:#fff">{pricing.seo}</span><span class="tier__u tier__u--dark">per month</span></p>
+          <p class="tier__x" style="color:#fff">nothing else to pay</p>
+          <p class="dim">For when you want to stop paying for every click eventually. Give it six months before you judge it.</p>
+          <p class="fine dim">Includes the new service area and service pages, so you are not paying the R350 and R450 add-on prices separately.</p>
+          <Button href={contact.whatsappHref}>Ask about Search</Button>
+        </div>
+      </div>
+      <p class="fine center-text">Bracketed prices are not final — confirm them before this page goes live.</p>
+    </div>
+  </section>
+
+  <section class="sec wrap split split--top">
+    <div class="stack" style="gap:18px">
+      <h2>Who this is for</h2>
+      <CheckList items={forWho} />
+      <p class="lede">We only do this for businesses whose site we built. Not because we are precious about it — because we cannot get results on a site we do not control, and we are not going to take your money to try.</p>
+    </div>
+    <div class="stack" style="gap:18px">
+      <h2>What we don&rsquo;t do</h2>
+      <CheckList items={dont} tone="cross" />
+      <p class="lede">If you need something outside this, we will tell you honestly and point you somewhere else.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="sec wrap faq-wrap">
+      <h2>Questions</h2>
+      <Faq items={gfFaqs} />
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta__in">
+      <div class="stack" style="gap:8px">
+        <h2 class="cta__h">Not sure which one you need?</h2>
+        <p class="lede">Send us a WhatsApp with your trade and the suburbs you cover. We will tell you honestly whether ads or search makes more sense first — or whether you should save your money for now.</p>
+      </div>
+      <Button href={contact.whatsappHref}>WhatsApp Us</Button>
+    </div>
+  </section>
+
+  <CallBar />
+</Base>
+
+<style>
+  .phero { padding-block: clamp(2.75rem, 2rem + 3.4vw, 4.5rem); }
+  .phero h1 { color: #fff; text-wrap: balance; }
+  .btns { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+
+  .honest { background: var(--c-amber-bg); border-bottom: 1px solid var(--c-amber-border); }
+  .honest__in { padding-block: 56px; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 56px; align-items: start; }
+  @media (max-width: 900px) { .honest__in { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+
+  .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; align-items: start; }
+  .split--top { align-items: start; }
+  @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+
+  .band { background: var(--c-surface); border-block: 1px solid var(--c-border); }
+  .panel { padding: 30px 28px; display: flex; flex-direction: column; gap: 16px; }
+  .panel h3 { font-size: 1.0625rem; font-weight: 800; }
+  .panel--alt { background: var(--c-bg); }
+
+  .center { align-items: center; text-align: center; }
+  .center-text { text-align: center; }
+  .measure { max-width: 76ch; }
+  .loop { padding: 28px 26px; display: flex; flex-direction: column; gap: 12px; }
+  .loop h3 { font-size: 1.25rem; font-weight: 800; }
+
+  .tier { background: var(--c-bg); border: 1px solid var(--c-border); border-radius: var(--r-lg); padding: 30px 28px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+  .tier--dark { background: var(--c-petrol); border: 0; box-shadow: var(--sh-petrol); }
+  .tier__p { display: flex; align-items: baseline; gap: 8px; }
+  .tier__n { font-size: clamp(2rem, 1.7rem + 1.3vw, 2.625rem); font-weight: 800; letter-spacing: -0.03em; }
+  .tier__u { font-size: var(--t-small); font-weight: 600; color: var(--c-muted-2); }
+  .tier__u--dark { color: var(--c-on-dark-2); }
+  .tier__x { font-size: 1rem; font-weight: 700; }
+  .dim { color: var(--c-on-dark) !important; }
+  .fine { font-size: var(--t-small); line-height: 1.6; color: var(--c-muted-2); }
+
+  .faq-wrap { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 60px; align-items: start; }
+  @media (max-width: 900px) { .faq-wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+
+  .cta { background: var(--c-surface-alt); border-top: 1px solid var(--c-border); }
+  .cta__in { padding-block: 44px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .cta__h { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 1.75rem); }
+</style>

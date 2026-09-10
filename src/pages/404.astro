@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+<Base title="Page not found | ProSites" description="That page doesn't exist.">
+  <section class="nf wrap">
+    <div class="stack" style="gap:20px; max-width:560px">
+      <h1>That page doesn&rsquo;t exist.</h1>
+      <p class="lede">The link may be old, or we may have moved something. Try the homepage, or tell us what you were looking for.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <Button href="/">Back to the homepage</Button>
+        <Button href="/start/" variant="ghost">Get in touch</Button>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>.nf { padding-block: clamp(3rem, 2rem + 5vw, 6rem); }</style>

@@ -1,0 +1,209 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import CallBar from '../components/CallBar.astro';
+import { meta } from '../data/content';
+import { contact, pricing, trades } from '../data/site';
+---
+
+<Base title={meta.start.title} description={meta.start.description}>
+
+  <section class="phero on-petrol">
+    <div class="wrap stack" style="gap:18px; max-width:820px">
+      <span class="eyebrow">Step one of two. The second one takes fifteen minutes.</span>
+      <h1>Let&rsquo;s get your website started</h1>
+      <p>Two ways to begin. Neither involves a meeting.</p>
+    </div>
+  </section>
+
+  <section class="wrap opts grid g-2">
+    <div class="card opt">
+      <span class="kicker">OPTION 1 — YOU KNOW WHAT YOU WANT</span>
+      <h2 class="opt__h">Fill in the form below</h2>
+      <p class="lede">Tell us about your business and what you need. We reply within one working day with your start date and an invoice for the 50% deposit. No sales call, no proposal document.</p>
+    </div>
+    <div class="card opt">
+      <span class="kicker">OPTION 2 — YOU&rsquo;VE GOT QUESTIONS FIRST</span>
+      <h2 class="opt__h">WhatsApp us instead</h2>
+      <p class="lede">It&rsquo;s the fastest way to get an answer, and you won&rsquo;t be put through a sales process. Most questions are answered in a couple of messages.</p>
+      <Button href={contact.whatsappHref} variant="whatsapp" class="self-start">WhatsApp {contact.whatsapp}</Button>
+    </div>
+  </section>
+
+  <section class="wrap formwrap">
+    <div class="fcard">
+      <div class="stack" style="gap:8px">
+        <h2>Tell us what you need</h2>
+        <p class="lede">Everything marked <span class="req">*</span> we need. The rest helps us quote properly the first time.</p>
+      </div>
+
+      <form name="enquiry" method="POST" data-netlify="true" netlify-honeypot="company-website" action="/start/thanks/" class="stack" style="gap:26px">
+        <input type="hidden" name="form-name" value="enquiry" />
+        <p class="hp"><label>Leave this empty <input name="company-website" tabindex="-1" autocomplete="off" /></label></p>
+
+        <div class="grid g-2" style="gap:20px">
+          <p class="f"><label for="name">Your name <span class="req">*</span></label>
+            <input id="name" name="name" type="text" required autocomplete="name" placeholder="Andre Botha" /></p>
+          <p class="f"><label for="business">Business name <span class="req">*</span></label>
+            <input id="business" name="business" type="text" required autocomplete="organization" placeholder="Botha Plumbing" /></p>
+          <p class="f"><label for="mobile">Mobile number <span class="req">*</span></label>
+            <input id="mobile" name="mobile" type="tel" required autocomplete="tel" inputmode="tel" placeholder="082 000 0000" /></p>
+          <p class="f"><label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@yourbusiness.co.za" /></p>
+        </div>
+
+        <hr class="hr" />
+
+        <div class="grid g-2" style="gap:20px">
+          <p class="f"><label for="trade">Your trade <span class="req">*</span></label>
+            <select id="trade" name="trade" required>
+              <option value="">Choose your trade</option>
+              {trades.map((t) => <option value={t}>{t}</option>)}
+              <option value="Other">Something else</option>
+            </select></p>
+          <p class="f"><label for="areas">Suburbs you cover</label>
+            <input id="areas" name="areas" type="text" placeholder="Durbanville, Bellville, Brackenfell" /></p>
+        </div>
+
+        <fieldset class="fs">
+          <legend>What do you want? <span class="req">*</span></legend>
+          <label class="radio">
+            <input type="radio" name="package" value="system" checked required />
+            <span class="radio__b"><strong>Website + job management app</strong>
+              <em>{pricing.once} once-off, then {pricing.monthly}/month</em></span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="package" value="unsure" />
+            <span class="radio__b"><strong>Not sure yet — tell me what fits</strong></span>
+          </label>
+        </fieldset>
+
+        <div class="grid g-2" style="gap:20px">
+          <fieldset class="fs"><legend>Do you have a logo?</legend>
+            <div class="yn">
+              <label><input type="radio" name="logo" value="yes" /><span>Yes</span></label>
+              <label><input type="radio" name="logo" value="no" /><span>No</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="fs"><legend>Photos of your work?</legend>
+            <div class="yn">
+              <label><input type="radio" name="photos" value="yes" /><span>Yes</span></label>
+              <label><input type="radio" name="photos" value="no" /><span>No</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <p class="hint">Neither is a problem. If you don&rsquo;t have them we&rsquo;ll tell you exactly what to send.</p>
+
+        <p class="f"><label for="notes">Anything else we should know?</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Old site I want replaced, current phone number, deadlines…"></textarea></p>
+
+        <hr class="hr" />
+
+        <div class="submit">
+          <button type="submit" class="btn-submit">Send This In</button>
+          <p class="hint">We usually reply within a few hours during the week, and always within one working day. Nothing is charged until you&rsquo;ve agreed the start date.</p>
+        </div>
+      </form>
+    </div>
+
+    <aside class="stack" style="gap:26px">
+      <div class="card next">
+        <h2 class="next__h">What happens next</h2>
+        <ol class="next__l">
+          <li><span class="kicker">1</span><div><strong>We read it and reply</strong><p class="hint">Within one working day, on WhatsApp or email — whichever you used.</p></div></li>
+          <li><span class="kicker">2</span><div><strong>We confirm and invoice</strong><p class="hint">Your start date, what&rsquo;s included, and the 50% deposit. Balance on launch.</p></div></li>
+          <li><span class="kicker">3</span><div><strong>You fill in the full brief</strong><p class="hint">Fifteen minutes, once. Services, service areas, logo and photos. Then we build.</p></div></li>
+        </ol>
+      </div>
+
+      <div class="talk">
+        <h2 class="next__h" style="color:#fff">Rather just talk?</h2>
+        <ul class="talk__l">
+          <li><a href={contact.phoneHref}>{contact.phone}</a></li>
+          <li><a href={contact.emailHref}>{contact.email}</a></li>
+          <li><span>Cape Town, South Africa</span></li>
+        </ul>
+        <p class="dim">We don&rsquo;t do discovery calls. If you&rsquo;d genuinely prefer a short call once your brief is in, we can — but it isn&rsquo;t required and most clients don&rsquo;t bother.</p>
+      </div>
+    </aside>
+  </section>
+
+  <CallBar />
+</Base>
+
+<style>
+  .phero { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4rem); }
+  .phero h1 { color: #fff; text-wrap: balance; }
+  .opts { padding-top: 56px; align-items: start; }
+  .opt { padding: 30px 28px; display: flex; flex-direction: column; gap: 14px; }
+  .opt__h { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.015em; }
+  .self-start { align-self: flex-start; }
+
+  .formwrap { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 48px; align-items: start; padding-block: 48px 76px; }
+  @media (max-width: 1000px) { .formwrap { grid-template-columns: minmax(0, 1fr); } }
+
+  .fcard { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); box-shadow: var(--sh-raised); padding: 36px 34px; display: flex; flex-direction: column; gap: 26px; }
+  @media (max-width: 560px) { .fcard { padding: 24px 20px; } }
+
+  .req { color: var(--c-orange); }
+  .hp { position: absolute; left: -9999px; }
+  .hr { border: 0; border-top: 1px solid var(--c-hairline); margin: 0; }
+
+  .f { display: flex; flex-direction: column; gap: 8px; margin: 0; }
+  .f label { font-size: 0.9rem; font-weight: 700; color: var(--c-ink); }
+  input[type='text'], input[type='tel'], input[type='email'], select, textarea {
+    width: 100%; font: inherit; font-size: 1rem; color: var(--c-ink);
+    background: var(--c-surface); border: 1px solid var(--c-border-strong);
+    border-radius: var(--r-sm); padding: 14px; min-height: 50px;
+    box-shadow: inset 0 1px 2px rgba(13, 27, 26, 0.04);
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  input::placeholder, textarea::placeholder { color: #9aa39d; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--c-orange); }
+  input:user-invalid, textarea:user-invalid { border-color: var(--c-flare); background: #fdf6f4; }
+
+  .fs { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .fs legend { font-size: 0.9rem; font-weight: 700; color: var(--c-ink); padding: 0; margin-bottom: 4px; }
+
+  .radio { display: block; cursor: pointer; }
+  .radio input { position: absolute; opacity: 0; }
+  .radio__b {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    border: 1px solid var(--c-border-strong); background: var(--c-surface);
+    border-radius: 12px; padding: 16px 18px; font-size: 1.0625rem;
+  }
+  .radio__b em { font-style: normal; font-weight: 700; font-size: 0.9375rem; color: var(--c-muted); }
+  .radio input:checked + .radio__b { border: 2px solid var(--c-orange); background: #fef4ee; padding: 15px 17px; }
+  .radio input:focus-visible + .radio__b { outline: 3px solid var(--c-orange); outline-offset: 3px; }
+
+  .yn { display: flex; gap: 10px; }
+  .yn label { flex: 1 1 0; }
+  .yn input { position: absolute; opacity: 0; }
+  .yn span { display: block; text-align: center; border: 1px solid var(--c-border-strong); background: var(--c-surface); border-radius: var(--r-sm); padding: 13px 10px; font-size: 0.97rem; font-weight: 600; cursor: pointer; min-height: 48px; line-height: 22px; }
+  .yn input:checked + span { border: 2px solid var(--c-orange); background: #fef4ee; padding: 12px 9px; }
+  .yn input:focus-visible + span { outline: 3px solid var(--c-orange); outline-offset: 3px; }
+
+  .hint { font-size: 0.85rem; color: var(--c-muted-2); line-height: 1.5; }
+  .submit { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .btn-submit {
+    font: inherit; font-size: 1.0625rem; font-weight: 700; color: #fff;
+    background: var(--c-orange); border: 0; border-radius: var(--r-pill);
+    padding: 17px 36px; cursor: pointer; box-shadow: var(--sh-orange);
+    transition: background-color 0.15s ease, transform 0.15s ease;
+  }
+  .btn-submit:hover { background: var(--c-orange-hover); transform: translateY(-1px); }
+  .submit .hint { flex: 1 1 260px; }
+
+  .next { padding: 28px 26px; }
+  .next__h { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.015em; }
+  .next__l { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+  .next__l li { display: flex; gap: 14px; align-items: flex-start; }
+  .next__l .kicker { width: 18px; flex-shrink: 0; }
+  .next__l strong { font-size: 1rem; }
+
+  .talk { background: var(--c-petrol); border-radius: var(--r-md); padding: 28px 26px; display: flex; flex-direction: column; gap: 16px; }
+  .talk__l { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 1rem; font-weight: 600; }
+  .talk__l a, .talk__l span { color: #fff; text-decoration: none; }
+  .talk__l a:hover { color: var(--c-amber); text-decoration: underline; }
+  .dim { font-size: 0.9rem; line-height: 1.55; color: var(--c-on-dark-2); }
+</style>
