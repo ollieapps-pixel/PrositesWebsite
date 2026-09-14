@@ -1,0 +1,28 @@
+---
+import QuoteForm from './QuoteForm.astro';
+import type { DemoSite } from '../../data/demos/types';
+interface Props { site: DemoSite; heading: string; lede: string; suburb?: string; id?: string }
+const { site, heading, lede, suburb, id = 'quote' } = Astro.props;
+---
+<section class="qs" id={id}>
+  <div class="d-sec d-wrap qs__in">
+    <div class="qs__copy">
+      <h2>{heading}</h2>
+      <p class="qs__lede">{lede}</p>
+      <div class="qs__alt">
+        <a class="d-btn d-btn--call" href={site.phoneHref}>Call {site.phone}</a>
+        <a class="d-btn d-btn--wa" href={site.whatsappHref}>WhatsApp us</a>
+      </div>
+      <slot />
+    </div>
+    <QuoteForm site={site} suburb={suburb} />
+  </div>
+</section>
+<style>
+  .qs { background: var(--d-tint); border-block: 1px solid var(--d-line); }
+  .qs__in { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .qs__copy { display: flex; flex-direction: column; gap: 18px; }
+  .qs__lede { color: var(--d-ink-2); font-size: 1.1rem; }
+  .qs__alt { display: flex; gap: 12px; flex-wrap: wrap; }
+  @media (max-width: 900px) { .qs__in { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+</style>

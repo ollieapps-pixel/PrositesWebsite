@@ -1,0 +1,21 @@
+---
+import Icon from '../Icon.astro';
+interface Props { items: { icon: string; title: string; body: string }[] }
+const { items } = Astro.props;
+---
+<div class="rg">
+  {items.map((r) => (
+    <div class="rg__i">
+      <Icon name={r.icon} size={30} stroke="var(--d-navy)" />
+      <h3>{r.title}</h3>
+      <p>{r.body}</p>
+    </div>
+  ))}
+</div>
+<style>
+  .rg { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+  .rg__i { display: flex; flex-direction: column; gap: 10px; }
+  .rg__i p { color: var(--d-muted); font-size: 1rem; }
+  @media (max-width: 900px) { .rg { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .rg { grid-template-columns: minmax(0, 1fr); gap: 22px; } }
+</style>

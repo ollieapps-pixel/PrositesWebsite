@@ -1,11 +1,12 @@
 ---
-import { biz, areas } from '../../data/demo-appliance';
-interface Props { suburb?: string }
-const { suburb = '' } = Astro.props;
-const appliances = ['Fridge or freezer', 'Washing machine', 'Oven or stove', 'Dishwasher', 'Tumble dryer', 'Something else'];
+import type { DemoSite } from '../../data/demos/types';
+interface Props { site: DemoSite; suburb?: string }
+const { site, suburb = '' } = Astro.props;
+const q = site.quote;
 ---
-<form class="qf" name="demo-quote" method="POST" data-netlify="true" netlify-honeypot="website" action={`${biz.base}/thanks/`}>
+<form class="qf" name="demo-quote" method="POST" data-netlify="true" netlify-honeypot="website" action={`/demo/${site.slug}/thanks/`}>
   <input type="hidden" name="form-name" value="demo-quote" />
+  <input type="hidden" name="industry" value={site.slug} />
   <input type="hidden" name="page" value={Astro.url.pathname} />
   <p class="qf__hp"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></p>
 
@@ -23,21 +24,21 @@ const appliances = ['Fridge or freezer', 'Washing machine', 'Oven or stove', 'Di
     <p class="qf__f"><label for="q-suburb">Suburb</label>
       <select id="q-suburb" name="suburb" required>
         <option value="">Choose your suburb</option>
-        {areas.map((a) => <option value={a} selected={a === suburb}>{a}</option>)}
+        {site.areas.map((a) => <option value={a} selected={a === suburb}>{a}</option>)}
         <option value="Other">Somewhere else</option>
       </select></p>
-    <p class="qf__f"><label for="q-appliance">Appliance</label>
-      <select id="q-appliance" name="appliance" required>
-        <option value="">What needs fixing?</option>
-        {appliances.map((a) => <option value={a}>{a}</option>)}
+    <p class="qf__f"><label for="q-subject">{q.subjectLabel}</label>
+      <select id="q-subject" name="subject" required>
+        <option value="">{q.subjectPrompt}</option>
+        {q.options.map((o) => <option value={o}>{o}</option>)}
       </select></p>
   </div>
 
-  <p class="qf__f"><label for="q-problem">What is wrong with it?</label>
-    <textarea id="q-problem" name="problem" rows="3" required placeholder="For example: fridge is running but not getting cold"></textarea></p>
+  <p class="qf__f"><label for="q-problem">{q.problemLabel}</label>
+    <textarea id="q-problem" name="problem" rows="3" required placeholder={q.problemPlaceholder}></textarea></p>
 
   <button type="submit" class="d-btn d-btn--call qf__go">Send my request</button>
-  <p class="qf__fine">Callout {biz.callout}, credited to the repair. No obligation until you approve the quote.</p>
+  <p class="qf__fine">{q.fine}</p>
 </form>
 <style>
   .qf { background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); box-shadow: 0 10px 34px rgba(14,27,44,0.1); padding: 28px 26px; display: flex; flex-direction: column; gap: 16px; }

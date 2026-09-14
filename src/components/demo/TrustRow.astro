@@ -1,14 +1,12 @@
 ---
 import Stars from './Stars.astro';
-import { biz } from '../../data/demo-appliance';
-interface Props { dark?: boolean }
-const { dark = false } = Astro.props;
+import type { DemoSite } from '../../data/demos/types';
+interface Props { site: DemoSite; dark?: boolean }
+const { site, dark = false } = Astro.props;
 ---
 <ul class:list={['trust', { 'trust--dark': dark }]}>
-  <li><Stars size={16} label={`Rated ${biz.rating} out of 5`} /><strong>{biz.rating} on Google</strong><span>{biz.reviewCount} reviews</span></li>
-  <li><strong>{biz.years} years</strong><span>repairing in {biz.city}</span></li>
-  <li><strong>{biz.callout} callout</strong><span>credited to the repair</span></li>
-  <li><strong>{biz.guaranteeDays}-day guarantee</strong><span>parts and labour</span></li>
+  <li><Stars size={16} label={`Rated ${site.rating} out of 5`} /><strong>{site.rating} on Google</strong><span>{site.reviewCount} reviews</span></li>
+  {site.trust.map((t) => <li><strong>{t.strong}</strong><span>{t.span}</span></li>)}
 </ul>
 <style>
   .trust { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }

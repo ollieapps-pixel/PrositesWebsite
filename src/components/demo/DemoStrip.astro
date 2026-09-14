@@ -1,9 +1,12 @@
 ---
+import type { DemoSite } from '../../data/demos/types';
 import { pricing } from '../../data/site';
+interface Props { site: DemoSite }
+const { site } = Astro.props;
 ---
 <div class="strip">
   <div class="d-wrap strip__in">
-    <p><span class="strip__full">This is a ProSites demo site. Ridgeway is a fictional business.</span><span class="strip__short">Demo site. Fictional business.</span></p>
+    <p><span class="strip__full">This is a ProSites demo site. {site.short} is a fictional business.</span><span class="strip__short">Demo site. Fictional business.</span></p>
     <a href="/start/"><span class="strip__full">Get one like it for {pricing.once}</span><span class="strip__short">Get one like it</span></a>
   </div>
 </div>

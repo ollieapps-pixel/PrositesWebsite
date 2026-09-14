@@ -1,0 +1,24 @@
+---
+import Stars from './Stars.astro';
+import type { DemoSite } from '../../data/demos/types';
+interface Props { site: DemoSite; limit?: number; area?: string }
+const { site, limit, area } = Astro.props;
+const list = (area ? site.reviews.filter((r) => r.area === area) : site.reviews).slice(0, limit ?? site.reviews.length);
+---
+<div class="rl">
+  {list.map((r) => (
+    <figure class="rl__c">
+      <Stars size={16} />
+      <blockquote>&ldquo;{r.text}&rdquo;</blockquote>
+      <figcaption><strong>{r.name}</strong>, {r.area}</figcaption>
+    </figure>
+  ))}
+</div>
+<style>
+  .rl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .rl__c { margin: 0; background: var(--d-bg); border: 1px solid var(--d-line); border-radius: var(--d-r-card); padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .rl__c blockquote { margin: 0; font-size: 1rem; line-height: 1.55; }
+  .rl__c figcaption { font-size: 0.92rem; color: var(--d-muted); }
+  @media (max-width: 900px) { .rl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .rl { grid-template-columns: minmax(0, 1fr); } }
+</style>

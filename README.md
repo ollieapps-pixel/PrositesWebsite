@@ -30,6 +30,34 @@ Almost every real-world fact lives in `src/data/site.ts`. Change the phone
 number there and it updates the header, the footer, the call bar and the
 Start page at once.
 
+## Demo client sites
+
+`/demo/[industry]/` holds the client demo sites. Every industry gets the same
+five pages from shared templates, plus a thank-you page and optional suburb
+pages:
+
+| Page | Route | Job |
+|---|---|---|
+| Home | `/demo/[industry]/` | The offer, trust, services, reviews, areas, quote form |
+| Services | `/services/` | Every job in detail, symptoms, "from" prices, pricing rules |
+| Areas | `/areas/` | Suburbs covered; links to any area pages |
+| About | `/about/` | Owner, how they work, credentials, all reviews |
+| Contact | `/contact/` | Quote form first, call/WhatsApp, hours, what happens next |
+
+To add an industry:
+
+1. Copy `src/data/demos/appliance-repair.ts` to a new file, e.g. `plumbing.ts`.
+2. Change the facts: services, copy, colours (`theme`), form options (`quote`),
+   FAQs. Leave out optional sections that don't fit, such as `brands`.
+3. Register it in `src/data/demos/index.ts`.
+
+Every page is generated from that one file. Industry-specific icons go in
+`src/components/Icon.astro`. Only add an entry to `areaPages` when you have
+genuinely local content for that suburb: near-identical suburb pages with
+the name swapped are treated as doorway pages by Google.
+
+All demo businesses are fictional, and each page carries a strip saying so.
+
 ## Before this goes live
 
 - [ ] Replace the five watermarked iStock comps (`src/assets/placeholder/README.md`)

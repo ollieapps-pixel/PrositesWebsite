@@ -1,0 +1,74 @@
+---
+import DemoLayout from '../../../../layouts/DemoLayout.astro';
+import PageHero from '../../../../components/demo/PageHero.astro';
+import ServiceGrid from '../../../../components/demo/ServiceGrid.astro';
+import ReviewList from '../../../../components/demo/ReviewList.astro';
+import QuoteSection from '../../../../components/demo/QuoteSection.astro';
+import DemoFaq from '../../../../components/demo/DemoFaq.astro';
+import { demos } from '../../../../data/demos';
+import type { DemoSite } from '../../../../data/demos/types';
+import { faqsFor } from '../../../../data/demos/types';
+import { businessSchema, breadcrumbSchema } from '../../../../data/demos/schema';
+
+export function getStaticPaths() {
+  return Object.values(demos).flatMap((site) =>
+    Object.keys(site.areaPages).map((area) => ({ params: { industry: site.slug, area }, props: { site, area } })));
+}
+const { site, area } = Astro.props as { site: DemoSite; area: string };
+const a = site.areaPages[area];
+const base = `/demo/${site.slug}`;
+const crumbs = [
+  { name: 'Home', href: `${base}/` },
+  { name: 'Areas', href: `${base}/areas/` },
+  { name: a.name, href: `${base}/areas/${area}/` },
+];
+const hasLocalReview = site.reviews.some((r) => r.area === a.name);
+const schema = [{ ...businessSchema(site, Astro.site), areaServed: { '@type': 'Place', name: `${a.name}, ${site.city}` } }, breadcrumbSchema(crumbs, Astro.site)];
+---
+<DemoLayout
+  site={site}
+  current="areas"
+  title={`${site.tagline} in ${a.name} | ${site.name}`}
+  description={`${site.tagline} in ${a.name}, including ${a.neighbourhoods.slice(0, 3).join(', ')}. ${site.priceRange}, rated ${site.rating} on Google.`}
+  schema={schema}
+>
+  <PageHero site={site} crumbs={crumbs} h1={`${site.tagline} in ${a.name}`}
+    sub={`${a.name} is one of our core areas, so there is usually a technician nearby. We come to your home in ${a.neighbourhoods.slice(0, -1).join(', ')} and ${a.neighbourhoods[a.neighbourhoods.length - 1]}.`}
+    quoteHref="#quote" />
+
+  <section class="d-sec d-wrap">
+    <div class="d-head">
+      <h2>Repairs we do in {a.name}</h2>
+      <p class="d-lede">Same services, same prices as everywhere else we work. No extra charge for {a.name}.</p>
+    </div>
+    <ServiceGrid site={site} quoteHref="#quote" />
+  </section>
+
+  {hasLocalReview && (
+    <section class="d-band">
+      <div class="d-sec d-wrap">
+        <div class="d-head"><h2>From a customer in {a.name}</h2></div>
+        <ReviewList site={site} area={a.name} />
+      </div>
+    </section>
+  )}
+
+  <QuoteSection site={site} heading={`Book a repair in ${a.name}`} lede={site.contact.sub} suburb={a.name}>
+    <div class="nearby">
+      <h3>Also near {a.name}</h3>
+      <p>{a.nearby.join(', ')}. <a href={`${base}/areas/`}>See all areas</a></p>
+    </div>
+  </QuoteSection>
+
+  <section class="d-sec d-wrap faq">
+    <div class="d-head"><h2>Questions</h2></div>
+    <DemoFaq items={faqsFor(site, 'areas')} />
+  </section>
+</DemoLayout>
+
+<style>
+  .nearby { margin-top: 10px; padding-top: 18px; border-top: 1px solid var(--d-line); display: flex; flex-direction: column; gap: 4px; }
+  .nearby p { color: var(--d-muted); }
+  .nearby a { font-weight: 800; }
+  .faq { max-width: 860px; }
+</style>

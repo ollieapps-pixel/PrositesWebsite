@@ -1,0 +1,79 @@
+---
+import DemoLayout from '../../../../layouts/DemoLayout.astro';
+import PageHero from '../../../../components/demo/PageHero.astro';
+import ReviewList from '../../../../components/demo/ReviewList.astro';
+import QuoteSection from '../../../../components/demo/QuoteSection.astro';
+import DemoFaq from '../../../../components/demo/DemoFaq.astro';
+import Icon from '../../../../components/Icon.astro';
+import { demoPaths } from '../../../../data/demos';
+import type { DemoSite } from '../../../../data/demos/types';
+import { areaSlug, faqsFor } from '../../../../data/demos/types';
+import { businessSchema, faqSchema, breadcrumbSchema } from '../../../../data/demos/schema';
+
+export function getStaticPaths() { return demoPaths(); }
+const { site } = Astro.props as { site: DemoSite };
+const base = `/demo/${site.slug}`;
+const crumbs = [{ name: 'Home', href: `${base}/` }, { name: 'Areas', href: `${base}/areas/` }];
+const faqs = faqsFor(site, 'areas');
+---
+<DemoLayout
+  site={site}
+  current="areas"
+  title={`${site.areasPage.h1}: ${site.tagline} in ${site.region} | ${site.name}`}
+  description={`${site.name} covers ${site.areas.slice(0, 5).join(', ')} and more across ${site.region}.`}
+  schema={[businessSchema(site, Astro.site), faqSchema(faqs), breadcrumbSchema(crumbs, Astro.site)]}
+>
+  <PageHero site={site} crumbs={crumbs} h1={site.areasPage.h1} sub={site.areasPage.sub} quoteHref="#quote" />
+
+  <section class="d-sec d-wrap">
+    <div class="d-head">
+      <h2>Suburbs we visit every week</h2>
+      <p class="d-lede">Same callout and repair prices in every suburb we cover.</p>
+    </div>
+    <ul class="ag">
+      {site.areas.map((a) => {
+        const page = site.areaPages[areaSlug(a)];
+        return page ? (
+          <li class="ag__c ag__c--link">
+            <a href={`${base}/areas/${areaSlug(a)}/`}>
+              <Icon name="pinDot" size={22} stroke="var(--d-navy)" />
+              <span class="ag__name">{a}</span>
+              <span class="ag__more">{site.tagline} in {a}</span>
+            </a>
+          </li>
+        ) : (
+          <li class="ag__c">
+            <Icon name="pinDot" size={22} stroke="var(--d-muted)" />
+            <span class="ag__name">{a}</span>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+
+  <section class="d-band">
+    <div class="d-sec d-wrap">
+      <div class="d-head"><h2>Reviews from across the area</h2></div>
+      <ReviewList site={site} limit={3} />
+    </div>
+  </section>
+
+  <QuoteSection site={site} heading="Not sure if we cover your suburb?" lede="Send the form or WhatsApp us your suburb. If we cannot get to you, we will tell you straight away." />
+
+  <section class="d-sec d-wrap faq">
+    <div class="d-head"><h2>Questions about our areas</h2></div>
+    <DemoFaq items={faqs} />
+  </section>
+</DemoLayout>
+
+<style>
+  .ag { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .ag__c { display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 14px 16px; background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); font-weight: 700; }
+  .ag__c--link { padding: 0; border-color: var(--d-navy); }
+  .ag__c--link a { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; align-items: center; width: 100%; min-height: 64px; padding: 12px 16px; color: var(--d-ink); text-decoration: none; }
+  .ag__c--link a:hover { background: var(--d-tint); }
+  .ag__c--link .ag__more { grid-column: 2; font-size: 0.85rem; font-weight: 700; color: var(--d-navy); text-decoration: underline; }
+  @media (max-width: 900px) { .ag { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .ag { grid-template-columns: minmax(0, 1fr); } }
+  .faq { max-width: 860px; }
+</style>

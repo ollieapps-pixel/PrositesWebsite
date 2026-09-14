@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets';
+import DemoLayout from '../../../layouts/DemoLayout.astro';
+import PageHero from '../../../components/demo/PageHero.astro';
+import ReasonsGrid from '../../../components/demo/ReasonsGrid.astro';
+import ReviewList from '../../../components/demo/ReviewList.astro';
+import CtaBand from '../../../components/demo/CtaBand.astro';
+import Stars from '../../../components/demo/Stars.astro';
+import { demoPaths } from '../../../data/demos';
+import type { DemoSite } from '../../../data/demos/types';
+import { businessSchema, breadcrumbSchema } from '../../../data/demos/schema';
+
+export function getStaticPaths() { return demoPaths(); }
+const { site } = Astro.props as { site: DemoSite };
+const base = `/demo/${site.slug}`;
+const crumbs = [{ name: 'Home', href: `${base}/` }, { name: 'About', href: `${base}/about/` }];
+const ab = site.about;
+---
+<DemoLayout
+  site={site}
+  current="about"
+  title={`${ab.h1} | ${site.region}`}
+  description={`${ab.sub} Meet ${ab.ownerName} and read what customers say.`}
+  schema={[businessSchema(site, Astro.site), breadcrumbSchema(crumbs, Astro.site)]}
+>
+  <PageHero site={site} crumbs={crumbs} h1={ab.h1} sub={ab.sub} quoteHref={`${base}/contact/`} />
+
+  <section class="d-sec d-wrap story">
+    <figure class="story__media">
+      <Image src={site.images.owner} alt={site.images.ownerAlt} widths={[480, 720]} sizes="(max-width: 900px) 100vw, 44vw" />
+      <figcaption><strong>{ab.ownerName}</strong><span>{ab.ownerRole}</span></figcaption>
+    </figure>
+    <div class="story__copy">
+      <h2>{ab.storyHeading}</h2>
+      {ab.story.map((p) => <p>{p}</p>)}
+      <dl class="facts">
+        <div><dt>Years repairing</dt><dd>{site.years}</dd></div>
+        <div><dt>Google rating</dt><dd>{site.rating}</dd></div>
+        <div><dt>Google reviews</dt><dd>{site.reviewCount}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="d-band">
+    <div class="d-sec d-wrap">
+      <div class="d-head"><h2>{ab.promisesHeading}</h2></div>
+      <ReasonsGrid items={ab.promises} />
+    </div>
+  </section>
+
+  <section class="d-sec d-wrap creds">
+    <h2>{ab.credentialsHeading}</h2>
+    <ul class="creds__l">{ab.credentials.map((c) => <li>{c}</li>)}</ul>
+  </section>
+
+  <section class="d-band" id="reviews">
+    <div class="d-sec d-wrap">
+      <div class="d-head">
+        <h2>What customers say</h2>
+        <p class="rating"><Stars size={20} label={`Rated ${site.rating} out of 5`} /><span><strong>{site.rating}</strong> from {site.reviewCount} Google reviews</span></p>
+      </div>
+      <ReviewList site={site} />
+    </div>
+  </section>
+
+  <CtaBand site={site} quoteHref={`${base}/contact/`} />
+</DemoLayout>
+
+<style>
+  .story { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+  .story__media { margin: 0; display: flex; flex-direction: column; }
+  .story__media :global(img) { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--d-r-card); }
+  .story__media figcaption { display: flex; flex-direction: column; padding: 14px 16px; background: var(--d-navy-deep); color: #fff; }
+  .story__media figcaption span { color: var(--d-on-navy); font-size: 0.92rem; }
+  .story__copy { display: flex; flex-direction: column; gap: 18px; }
+  .story__copy p { color: var(--d-ink-2); font-size: 1.1rem; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 8px 0 0; }
+  .facts div { padding-left: 14px; border-left: 3px solid var(--d-accent); }
+  .facts dt { font-size: 0.875rem; color: var(--d-muted); }
+  .facts dd { margin: 0; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+  @media (max-width: 900px) {
+    .story { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .story__media :global(img) { aspect-ratio: 16 / 11; }
+  }
+
+  .creds { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: start; }
+  .creds__l { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .creds__l li { position: relative; padding: 14px 16px 14px 42px; background: var(--d-surface); border: 1px solid var(--d-line); font-weight: 700; }
+  .creds__l li::before { content: ''; position: absolute; left: 16px; top: 50%; width: 12px; height: 12px; margin-top: -6px; background: var(--d-accent); }
+  @media (max-width: 900px) { .creds { grid-template-columns: minmax(0, 1fr); gap: 20px; } }
+  @media (max-width: 560px) { .creds__l { grid-template-columns: minmax(0, 1fr); } }
+
+  .rating { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--d-muted); }
+</style>

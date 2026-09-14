@@ -1,14 +1,15 @@
 ---
-import { biz } from '../../data/demo-appliance';
-interface Props { light?: boolean }
-const { light = false } = Astro.props;
+import type { DemoSite } from '../../data/demos/types';
+interface Props { site: DemoSite; light?: boolean }
+const { site, light = false } = Astro.props;
 ---
-<a href={`${biz.base}/`} class:list={['logo', { 'logo--light': light }]} aria-label={`${biz.name} home`}>
+<a href={`/demo/${site.slug}/`} class:list={['logo', { 'logo--light': light }]} aria-label={`${site.name} home`}>
   <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
-    <rect width="34" height="34" rx="0" fill={light ? '#f5a524' : '#123a66'} />
-    <path d="M10 25V9h7.2c3.6 0 5.8 2 5.8 5 0 2.4-1.4 4-3.6 4.6L24 25h-4.4l-4-6H14v6zm4-9.6h3c1.6 0 2.4-.7 2.4-1.9s-.8-1.9-2.4-1.9h-3z" fill={light ? '#0b2545' : '#ffffff'} />
+    <rect width="34" height="34" style={`fill: ${light ? 'var(--d-accent)' : 'var(--d-navy)'}`} />
+    <text x="17" y="24" text-anchor="middle" font-size="19" font-weight="800"
+          style={`font-family: 'Manrope Variable', sans-serif; fill: ${light ? 'var(--d-navy-deep)' : '#ffffff'}`}>{site.monogram}</text>
   </svg>
-  <span class="logo__t"><strong>Ridgeway</strong><span>Appliance Repairs</span></span>
+  <span class="logo__t"><strong>{site.short}</strong><span>{site.tagline}</span></span>
 </a>
 <style>
   .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--d-ink); min-height: 44px; }

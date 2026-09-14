@@ -1,0 +1,73 @@
+---
+import DemoLayout from '../../../layouts/DemoLayout.astro';
+import PageHero from '../../../components/demo/PageHero.astro';
+import QuoteForm from '../../../components/demo/QuoteForm.astro';
+import StepsList from '../../../components/demo/StepsList.astro';
+import DemoFaq from '../../../components/demo/DemoFaq.astro';
+import Icon from '../../../components/Icon.astro';
+import { demoPaths } from '../../../data/demos';
+import type { DemoSite } from '../../../data/demos/types';
+import { faqsFor } from '../../../data/demos/types';
+import { businessSchema, faqSchema, breadcrumbSchema } from '../../../data/demos/schema';
+
+export function getStaticPaths() { return demoPaths(); }
+const { site } = Astro.props as { site: DemoSite };
+const base = `/demo/${site.slug}`;
+const crumbs = [{ name: 'Home', href: `${base}/` }, { name: 'Contact', href: `${base}/contact/` }];
+const faqs = faqsFor(site, 'contact');
+---
+<DemoLayout
+  site={site}
+  current="contact"
+  title={`${site.contact.h1} | ${site.name}`}
+  description={`${site.contact.sub} Open ${site.hours[0].days}, ${site.hours[0].time}.`}
+  schema={[businessSchema(site, Astro.site), faqSchema(faqs), breadcrumbSchema(crumbs, Astro.site)]}
+>
+  <PageHero site={site} crumbs={crumbs} h1={site.contact.h1} sub={site.contact.sub} quoteHref="#quote" />
+
+  <section class="d-sec d-wrap ct" id="quote">
+    <QuoteForm site={site} />
+    <aside class="ct__card" aria-label="Other ways to reach us">
+      <h2 class="ct__h">Prefer to talk?</h2>
+      <a class="d-btn d-btn--call" href={site.phoneHref}><Icon name="phone" size={20} stroke="currentColor" />Call {site.phone}</a>
+      <a class="d-btn d-btn--wa" href={site.whatsappHref}>WhatsApp us</a>
+      <a class="ct__mail" href={`mailto:${site.email}`}><Icon name="mail" size={20} stroke="var(--d-navy)" />{site.email}</a>
+
+      <h3 class="ct__sub"><Icon name="clock" size={20} stroke="var(--d-navy)" />Hours</h3>
+      <dl class="ct__hours">
+        {site.hours.map((h) => <div><dt>{h.days}</dt><dd>{h.time}</dd></div>)}
+      </dl>
+
+      <h3 class="ct__sub"><Icon name="pinDot" size={20} stroke="var(--d-navy)" />Where we work</h3>
+      <p class="ct__areas">We come to your home across {site.region}. <a href={`${base}/areas/`}>See all areas</a></p>
+    </aside>
+  </section>
+
+  <section class="d-band">
+    <div class="d-sec d-wrap">
+      <div class="d-head"><h2>What happens after you send it</h2></div>
+      <StepsList site={site} />
+    </div>
+  </section>
+
+  <section class="d-sec d-wrap faq">
+    <div class="d-head"><h2>Before you book</h2></div>
+    <DemoFaq items={faqs} />
+  </section>
+</DemoLayout>
+
+<style>
+  .ct { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 32px; align-items: start; scroll-margin-top: 90px; }
+  .ct__card { background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); padding: 26px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .ct__h { font-size: 1.4rem; margin-bottom: 4px; }
+  .ct__mail { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 700; word-break: break-all; }
+  .ct__sub { display: flex; align-items: center; gap: 8px; font-size: 1.05rem; margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--d-line); }
+  .ct__hours { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+  .ct__hours div { display: flex; justify-content: space-between; gap: 12px; }
+  .ct__hours dt { color: var(--d-ink-2); }
+  .ct__hours dd { margin: 0; font-weight: 700; }
+  .ct__areas { color: var(--d-muted); }
+  .ct__areas a { font-weight: 800; }
+  @media (max-width: 900px) { .ct { grid-template-columns: minmax(0, 1fr); } }
+  .faq { max-width: 860px; }
+</style>

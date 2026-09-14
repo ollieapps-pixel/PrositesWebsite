@@ -1,15 +1,16 @@
 ---
 import Icon from '../Icon.astro';
-import { services } from '../../data/demo-appliance';
-interface Props { quoteHref: string }
-const { quoteHref } = Astro.props;
+import type { DemoSite } from '../../data/demos/types';
+interface Props { site: DemoSite; quoteHref: string; detailLinks?: boolean }
+const { site, quoteHref, detailLinks = true } = Astro.props;
+const base = `/demo/${site.slug}`;
 ---
 <div class="sg">
-  {services.map((s) => (
+  {site.services.map((s) => (
     <article class="sg__c">
       <span class="sg__ico"><Icon name={s.icon} size={28} stroke="var(--d-navy)" /></span>
-      <h3>{s.title}</h3>
-      <p class="sg__b">{s.body}</p>
+      <h3>{detailLinks ? <a href={`${base}/services/#${s.id}`}>{s.title}</a> : s.title}</h3>
+      <p class="sg__b">{s.short}</p>
       <div class="sg__f">
         <span class="sg__from">From <strong>{s.from}</strong></span>
         <a href={quoteHref}>Book this repair</a>
@@ -20,7 +21,9 @@ const { quoteHref } = Astro.props;
 <style>
   .sg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
   .sg__c { background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); box-shadow: var(--d-shadow); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px; }
-  .sg__ico { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 0; background: #eaf0f7; }
+  .sg__c h3 a { color: var(--d-ink); text-decoration: none; }
+  .sg__c h3 a:hover { color: var(--d-navy); text-decoration: underline; }
+  .sg__ico { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 0; background: var(--d-tint); }
   .sg__b { color: var(--d-muted); font-size: 1rem; line-height: 1.55; flex-grow: 1; }
   .sg__f { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid var(--d-line); flex-wrap: wrap; }
   .sg__from { font-size: 0.95rem; color: var(--d-muted); }

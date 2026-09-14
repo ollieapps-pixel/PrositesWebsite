@@ -1,52 +1,66 @@
 ---
 import Logo from './Logo.astro';
-import { biz, areas, areaPages, areaSlug } from '../../data/demo-appliance';
+import type { DemoSite } from '../../data/demos/types';
+import { areaSlug } from '../../data/demos/types';
+interface Props { site: DemoSite }
+const { site } = Astro.props;
+const base = `/demo/${site.slug}`;
 ---
 <footer class="ft">
   <div class="d-wrap ft__grid">
     <div class="ft__col">
-      <Logo light />
-      <p class="ft__blurb">Fridge, washing machine, oven, dishwasher and tumble dryer repairs at your home, across {biz.region}.</p>
+      <Logo site={site} light />
+      <p class="ft__blurb">{site.services.map((s) => s.title.replace(/ repairs?$/i, '').toLowerCase()).slice(0, 4).join(', ')} and more, repaired at your home across {site.region}.</p>
+    </div>
+    <div class="ft__col">
+      <h2 class="ft__h">Pages</h2>
+      <ul>
+        <li><a href={`${base}/`}>Home</a></li>
+        <li><a href={`${base}/services/`}>Services</a></li>
+        <li><a href={`${base}/areas/`}>Areas</a></li>
+        <li><a href={`${base}/about/`}>About</a></li>
+        <li><a href={`${base}/contact/`}>Contact</a></li>
+      </ul>
     </div>
     <div class="ft__col">
       <h2 class="ft__h">Contact</h2>
       <ul>
-        <li><a href={biz.phoneHref}>{biz.phone}</a></li>
-        <li><a href={biz.whatsappHref}>WhatsApp us</a></li>
-        <li><a href={`mailto:${biz.email}`}>{biz.email}</a></li>
+        <li><a href={site.phoneHref}>{site.phone}</a></li>
+        <li><a href={site.whatsappHref}>WhatsApp us</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
       </ul>
-    </div>
-    <div class="ft__col">
-      <h2 class="ft__h">Hours</h2>
-      <ul>{biz.hours.map((h) => <li><span>{h.days}</span><br /><span class="ft__dim">{h.time}</span></li>)}</ul>
+      <h2 class="ft__h ft__h--gap">Hours</h2>
+      <ul>{site.hours.map((h) => <li class="ft__hours"><span>{h.days}</span><span class="ft__dim">{h.time}</span></li>)}</ul>
     </div>
     <div class="ft__col">
       <h2 class="ft__h">Areas</h2>
       <ul class="ft__areas">
-        {areas.map((a) => areaPages[areaSlug(a)]
-          ? <li><a href={`${biz.base}/areas/${areaSlug(a)}/`}>{a}</a></li>
+        {site.areas.map((a) => site.areaPages[areaSlug(a)]
+          ? <li><a href={`${base}/areas/${areaSlug(a)}/`}>{a}</a></li>
           : <li><span>{a}</span></li>)}
       </ul>
     </div>
   </div>
   <div class="d-wrap ft__bottom">
-    <span>© {new Date().getFullYear()} {biz.name}</span>
+    <span>© {new Date().getFullYear()} {site.name}</span>
     <a href="/">Demo website by ProSites</a>
   </div>
 </footer>
 <style>
   .ft { background: var(--d-navy-deep); color: var(--d-on-navy); }
-  .ft__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 40px; padding-block: 56px 32px; }
-  .ft__col { display: flex; flex-direction: column; gap: 14px; }
+  .ft__grid { display: grid; grid-template-columns: 1.4fr 0.8fr 1.1fr 1.3fr; gap: 40px; padding-block: 56px 32px; }
+  .ft__col { display: flex; flex-direction: column; gap: 12px; }
   .ft__blurb { font-size: 0.97rem; max-width: 36ch; }
   .ft__h { font-size: 0.95rem; color: #fff; }
-  .ft ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-  .ft a { color: #fff; text-decoration: none; display: inline-flex; min-height: 36px; align-items: center; }
+  .ft__h--gap { margin-top: 10px; }
+  .ft ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .ft a { color: #fff; text-decoration: none; display: inline-flex; min-height: 40px; align-items: center; }
   .ft a:hover { color: var(--d-accent); text-decoration: underline; }
+  .ft__hours { display: flex; flex-direction: column; padding-block: 3px; }
   .ft__dim { color: var(--d-on-navy); font-size: 0.92rem; }
   .ft__areas { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px !important; font-size: 0.95rem; }
-  .ft__areas span { display: inline-flex; min-height: 36px; align-items: center; }
-  .ft__bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 18px 30px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.9rem; }
+  .ft__areas span { display: inline-flex; min-height: 40px; align-items: center; }
+  .ft__bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 12px 24px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.9rem; }
   .ft__bottom a { color: var(--d-accent); min-height: 44px; }
   @media (max-width: 900px) { .ft__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 560px) { .ft__grid { grid-template-columns: minmax(0, 1fr); } .ft a { min-height: 44px; } }

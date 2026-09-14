@@ -1,0 +1,43 @@
+---
+import TrustRow from './TrustRow.astro';
+import Icon from '../Icon.astro';
+import type { DemoSite } from '../../data/demos/types';
+interface Props { site: DemoSite; crumbs: { name: string; href: string }[]; h1: string; sub: string; quoteHref: string }
+const { site, crumbs, h1, sub, quoteHref } = Astro.props;
+---
+<section class="ph">
+  <div class="d-wrap ph__in">
+    <nav aria-label="Breadcrumb" class="ph__crumbs">
+      <ol>
+        {crumbs.map((c, i) => (
+          <li>{i < crumbs.length - 1 ? <a href={c.href}>{c.name}</a> : <span aria-current="page">{c.name}</span>}</li>
+        ))}
+      </ol>
+    </nav>
+    <h1>{h1}</h1>
+    <p class="ph__sub">{sub}</p>
+    <div class="ph__btns">
+      <a class="d-btn d-btn--call" href={site.phoneHref}><Icon name="phone" size={20} stroke="currentColor" />Call {site.phone}</a>
+      <a class="d-btn d-btn--line" href={quoteHref}>Get a quote</a>
+    </div>
+    <TrustRow site={site} dark />
+  </div>
+</section>
+<style>
+  .ph { background: var(--d-navy-deep); color: #fff; }
+  .ph__in { display: flex; flex-direction: column; gap: 20px; padding-block: 28px 44px; }
+  .ph__crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 10px; list-style: none; margin: 0; padding: 0; font-size: 0.9rem; color: var(--d-on-navy); }
+  .ph__crumbs li + li::before { content: '/'; margin-right: 10px; opacity: 0.6; }
+  .ph__crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: #fff; }
+  .ph__crumbs a:hover { color: var(--d-accent); }
+  .ph h1 { color: #fff; max-width: 22ch; text-wrap: balance; }
+  .ph__sub { font-size: 1.15rem; color: var(--d-on-navy); max-width: 60ch; }
+  .ph__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ph :global(.trust) { padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.14); }
+  @media (max-width: 560px) {
+    .ph__in { gap: 14px; padding-block: 4px 28px; }
+    .ph__sub { font-size: 1.05rem; line-height: 1.5; }
+    .ph__btns { gap: 10px; }
+    .ph :global(.trust) { padding-top: 16px; }
+  }
+</style>
