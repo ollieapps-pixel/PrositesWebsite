@@ -1,0 +1,31 @@
+---
+import Icon from '../Icon.astro';
+import { services } from '../../data/demo-appliance';
+interface Props { quoteHref: string }
+const { quoteHref } = Astro.props;
+---
+<div class="sg">
+  {services.map((s) => (
+    <article class="sg__c">
+      <span class="sg__ico"><Icon name={s.icon} size={28} stroke="var(--d-navy)" /></span>
+      <h3>{s.title}</h3>
+      <p class="sg__b">{s.body}</p>
+      <div class="sg__f">
+        <span class="sg__from">From <strong>{s.from}</strong></span>
+        <a href={quoteHref}>Book this repair</a>
+      </div>
+    </article>
+  ))}
+</div>
+<style>
+  .sg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .sg__c { background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); box-shadow: var(--d-shadow); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px; }
+  .sg__ico { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 12px; background: #eaf0f7; }
+  .sg__b { color: var(--d-muted); font-size: 1rem; line-height: 1.55; flex-grow: 1; }
+  .sg__f { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid var(--d-line); flex-wrap: wrap; }
+  .sg__from { font-size: 0.95rem; color: var(--d-muted); }
+  .sg__from strong { color: var(--d-ink); font-size: 1.05rem; }
+  .sg__f a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; }
+  @media (max-width: 960px) { .sg { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .sg { grid-template-columns: minmax(0, 1fr); } }
+</style>

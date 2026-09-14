@@ -1,0 +1,21 @@
+---
+import Stars from './Stars.astro';
+import { biz } from '../../data/demo-appliance';
+interface Props { dark?: boolean }
+const { dark = false } = Astro.props;
+---
+<ul class:list={['trust', { 'trust--dark': dark }]}>
+  <li><Stars size={16} label={`Rated ${biz.rating} out of 5`} /><strong>{biz.rating} on Google</strong><span>{biz.reviewCount} reviews</span></li>
+  <li><strong>{biz.years} years</strong><span>repairing in {biz.city}</span></li>
+  <li><strong>{biz.callout} callout</strong><span>credited to the repair</span></li>
+  <li><strong>{biz.guaranteeDays}-day guarantee</strong><span>parts and labour</span></li>
+</ul>
+<style>
+  .trust { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .trust li { display: flex; flex-direction: column; gap: 2px; padding-left: 14px; border-left: 3px solid var(--d-accent); }
+  .trust strong { font-size: 1rem; font-weight: 800; color: var(--d-ink); line-height: 1.3; }
+  .trust span { font-size: 0.875rem; color: var(--d-muted); line-height: 1.35; }
+  .trust--dark strong { color: #fff; }
+  .trust--dark span { color: var(--d-on-navy); }
+  @media (max-width: 900px) { .trust { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 14px; } }
+</style>

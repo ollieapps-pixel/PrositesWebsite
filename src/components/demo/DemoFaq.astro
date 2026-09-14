@@ -1,0 +1,23 @@
+---
+interface Props { items: readonly { q: string; a: string }[] }
+const { items } = Astro.props;
+---
+<div class="fq">
+  {items.map((it, i) => (
+    <details class="fq__i" open={i === 0}>
+      <summary><span>{it.q}</span><span class="fq__pm" aria-hidden="true"></span></summary>
+      <p>{it.a}</p>
+    </details>
+  ))}
+</div>
+<style>
+  .fq { display: flex; flex-direction: column; gap: 10px; }
+  .fq__i { background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); }
+  .fq__i summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; min-height: 56px; cursor: pointer; list-style: none; font-weight: 800; font-size: 1.0625rem; }
+  .fq__i summary::-webkit-details-marker { display: none; }
+  .fq__pm { position: relative; width: 16px; height: 16px; flex-shrink: 0; }
+  .fq__pm::before, .fq__pm::after { content: ''; position: absolute; left: 0; top: 7px; width: 16px; height: 2.5px; border-radius: 2px; background: var(--d-navy); }
+  .fq__pm::after { transform: rotate(90deg); transition: transform 0.15s ease; }
+  .fq__i[open] .fq__pm::after { transform: rotate(0deg); }
+  .fq__i p { padding: 0 20px 18px; color: var(--d-muted); max-width: 70ch; }
+</style>

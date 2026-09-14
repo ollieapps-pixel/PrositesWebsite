@@ -1,0 +1,58 @@
+---
+import { biz, areas } from '../../data/demo-appliance';
+interface Props { suburb?: string }
+const { suburb = '' } = Astro.props;
+const appliances = ['Fridge or freezer', 'Washing machine', 'Oven or stove', 'Dishwasher', 'Tumble dryer', 'Something else'];
+---
+<form class="qf" name="demo-quote" method="POST" data-netlify="true" netlify-honeypot="website" action={`${biz.base}/thanks/`}>
+  <input type="hidden" name="form-name" value="demo-quote" />
+  <input type="hidden" name="page" value={Astro.url.pathname} />
+  <p class="qf__hp"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></p>
+
+  <h3 class="qf__h">Get a quote</h3>
+  <p class="qf__sub">Takes under a minute. We reply within working hours, usually within the hour.</p>
+
+  <div class="qf__row">
+    <p class="qf__f"><label for="q-name">Your name</label>
+      <input id="q-name" name="name" type="text" required autocomplete="name" /></p>
+    <p class="qf__f"><label for="q-phone">Phone number</label>
+      <input id="q-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" /></p>
+  </div>
+
+  <div class="qf__row">
+    <p class="qf__f"><label for="q-suburb">Suburb</label>
+      <select id="q-suburb" name="suburb" required>
+        <option value="">Choose your suburb</option>
+        {areas.map((a) => <option value={a} selected={a === suburb}>{a}</option>)}
+        <option value="Other">Somewhere else</option>
+      </select></p>
+    <p class="qf__f"><label for="q-appliance">Appliance</label>
+      <select id="q-appliance" name="appliance" required>
+        <option value="">What needs fixing?</option>
+        {appliances.map((a) => <option value={a}>{a}</option>)}
+      </select></p>
+  </div>
+
+  <p class="qf__f"><label for="q-problem">What is wrong with it?</label>
+    <textarea id="q-problem" name="problem" rows="3" required placeholder="For example: fridge is running but not getting cold"></textarea></p>
+
+  <button type="submit" class="d-btn d-btn--call qf__go">Send my request</button>
+  <p class="qf__fine">Callout {biz.callout}, credited to the repair. No obligation until you approve the quote.</p>
+</form>
+<style>
+  .qf { background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); box-shadow: 0 10px 34px rgba(14,27,44,0.1); padding: 28px 26px; display: flex; flex-direction: column; gap: 16px; }
+  .qf__hp { position: absolute; left: -9999px; }
+  .qf__h { font-size: 1.5rem; }
+  .qf__sub { color: var(--d-muted); font-size: 0.97rem; margin-top: -8px; }
+  .qf__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .qf__f { display: flex; flex-direction: column; gap: 6px; margin: 0; }
+  .qf__f label { font-size: 0.92rem; font-weight: 700; color: var(--d-ink); }
+  .qf input, .qf select, .qf textarea { width: 100%; font: inherit; font-size: 1rem; color: var(--d-ink); background: #fff; border: 1.5px solid #c3ccd7; border-radius: var(--d-r-btn); padding: 12px 13px; min-height: 50px; }
+  .qf textarea { resize: vertical; min-height: 96px; }
+  .qf ::placeholder { color: #6f7c8b; }
+  .qf input:focus-visible, .qf select:focus-visible, .qf textarea:focus-visible { border-color: var(--d-navy); }
+  .qf input:user-invalid, .qf select:user-invalid, .qf textarea:user-invalid { border-color: #c0392b; background: #fdf5f4; }
+  .qf__go { width: 100%; font-size: 1.1rem; min-height: 56px; }
+  .qf__fine { font-size: 0.85rem; color: var(--d-muted); text-align: center; }
+  @media (max-width: 560px) { .qf { padding: 22px 18px; } .qf__row { grid-template-columns: minmax(0, 1fr); } }
+</style>

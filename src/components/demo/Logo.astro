@@ -1,0 +1,20 @@
+---
+import { biz } from '../../data/demo-appliance';
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+---
+<a href={`${biz.base}/`} class:list={['logo', { 'logo--light': light }]} aria-label={`${biz.name} home`}>
+  <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+    <rect width="34" height="34" rx="9" fill={light ? '#f5a524' : '#123a66'} />
+    <path d="M10 25V9h7.2c3.6 0 5.8 2 5.8 5 0 2.4-1.4 4-3.6 4.6L24 25h-4.4l-4-6H14v6zm4-9.6h3c1.6 0 2.4-.7 2.4-1.9s-.8-1.9-2.4-1.9h-3z" fill={light ? '#0b2545' : '#ffffff'} />
+  </svg>
+  <span class="logo__t"><strong>Ridgeway</strong><span>Appliance Repairs</span></span>
+</a>
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--d-ink); min-height: 44px; }
+  .logo__t { display: flex; flex-direction: column; line-height: 1.1; }
+  .logo__t strong { font-size: 1.125rem; font-weight: 800; letter-spacing: -0.01em; }
+  .logo__t span { font-size: 0.78rem; font-weight: 600; color: var(--d-muted); }
+  .logo--light { color: #fff; }
+  .logo--light .logo__t span { color: var(--d-on-navy); }
+</style>

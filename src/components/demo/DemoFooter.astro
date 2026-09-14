@@ -1,0 +1,53 @@
+---
+import Logo from './Logo.astro';
+import { biz, areas, areaPages, areaSlug } from '../../data/demo-appliance';
+---
+<footer class="ft">
+  <div class="d-wrap ft__grid">
+    <div class="ft__col">
+      <Logo light />
+      <p class="ft__blurb">Fridge, washing machine, oven, dishwasher and tumble dryer repairs at your home, across {biz.region}.</p>
+    </div>
+    <div class="ft__col">
+      <h2 class="ft__h">Contact</h2>
+      <ul>
+        <li><a href={biz.phoneHref}>{biz.phone}</a></li>
+        <li><a href={biz.whatsappHref}>WhatsApp us</a></li>
+        <li><a href={`mailto:${biz.email}`}>{biz.email}</a></li>
+      </ul>
+    </div>
+    <div class="ft__col">
+      <h2 class="ft__h">Hours</h2>
+      <ul>{biz.hours.map((h) => <li><span>{h.days}</span><br /><span class="ft__dim">{h.time}</span></li>)}</ul>
+    </div>
+    <div class="ft__col">
+      <h2 class="ft__h">Areas</h2>
+      <ul class="ft__areas">
+        {areas.map((a) => areaPages[areaSlug(a)]
+          ? <li><a href={`${biz.base}/areas/${areaSlug(a)}/`}>{a}</a></li>
+          : <li><span>{a}</span></li>)}
+      </ul>
+    </div>
+  </div>
+  <div class="d-wrap ft__bottom">
+    <span>© {new Date().getFullYear()} {biz.name}</span>
+    <a href="/">Demo website by ProSites</a>
+  </div>
+</footer>
+<style>
+  .ft { background: var(--d-navy-deep); color: var(--d-on-navy); }
+  .ft__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 40px; padding-block: 56px 32px; }
+  .ft__col { display: flex; flex-direction: column; gap: 14px; }
+  .ft__blurb { font-size: 0.97rem; max-width: 36ch; }
+  .ft__h { font-size: 0.95rem; color: #fff; }
+  .ft ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .ft a { color: #fff; text-decoration: none; display: inline-flex; min-height: 36px; align-items: center; }
+  .ft a:hover { color: var(--d-accent); text-decoration: underline; }
+  .ft__dim { color: var(--d-on-navy); font-size: 0.92rem; }
+  .ft__areas { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px !important; font-size: 0.95rem; }
+  .ft__areas span { display: inline-flex; min-height: 36px; align-items: center; }
+  .ft__bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 18px 30px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.9rem; }
+  .ft__bottom a { color: var(--d-accent); min-height: 44px; }
+  @media (max-width: 900px) { .ft__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .ft__grid { grid-template-columns: minmax(0, 1fr); } .ft a { min-height: 44px; } }
+</style>

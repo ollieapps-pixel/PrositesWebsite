@@ -1,0 +1,22 @@
+---
+import { pricing } from '../../data/site';
+---
+<div class="strip">
+  <div class="d-wrap strip__in">
+    <p><span class="strip__full">This is a ProSites demo site. Ridgeway is a fictional business.</span><span class="strip__short">Demo site. Fictional business.</span></p>
+    <a href="/start/"><span class="strip__full">Get one like it for {pricing.once}</span><span class="strip__short">Get one like it</span></a>
+  </div>
+</div>
+<style>
+  .strip { background: #0a403e; color: #d7e5e3; font-size: 0.875rem; }
+  .strip__in { display: flex; align-items: center; justify-content: center; gap: 4px 18px; flex-wrap: wrap; text-align: center; }
+  .strip a { display: inline-flex; align-items: center; min-height: 40px; color: #f6c445; font-weight: 700; }
+  .strip a:hover { color: #fff; }
+  .strip__short { display: none; }
+  @media (max-width: 560px) {
+    .strip__in { flex-wrap: nowrap; justify-content: space-between; }
+    .strip__full { display: none; }
+    .strip__short { display: inline; }
+    .strip a { min-height: 44px; }
+  }
+</style>

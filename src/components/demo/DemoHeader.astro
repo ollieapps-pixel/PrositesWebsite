@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+import Icon from '../Icon.astro';
+import { biz } from '../../data/demo-appliance';
+const b = biz.base + '/';
+const links = [
+  { label: 'Services', href: `${b}#services` },
+  { label: 'Areas', href: `${b}#areas` },
+  { label: 'Reviews', href: `${b}#reviews` },
+  { label: 'FAQ', href: `${b}#faq` },
+];
+---
+<header class="hdr">
+  <div class="d-wrap hdr__in">
+    <Logo />
+    <nav aria-label="Main" class="hdr__nav">
+      <ul>{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+    </nav>
+    <div class="hdr__cta">
+      <a class="hdr__tel" href={biz.phoneHref}>
+        <Icon name="phone" size={20} stroke="var(--d-navy)" />
+        <span>{biz.phone}</span>
+      </a>
+      <a class="d-btn d-btn--call hdr__quote" href={`${b}#quote`}>Get a quote</a>
+    </div>
+  </div>
+</header>
+<style>
+  .hdr { position: sticky; top: 0; z-index: 20; background: var(--d-surface); border-bottom: 1px solid var(--d-line); }
+  .hdr__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 10px; }
+  .hdr__nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+  .hdr__nav a { color: var(--d-ink-2); font-weight: 600; text-decoration: none; }
+  .hdr__nav a:hover { color: var(--d-navy); }
+  .hdr__cta { display: flex; align-items: center; gap: 14px; }
+  .hdr__tel { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 4px; font-weight: 800; color: var(--d-ink); text-decoration: none; white-space: nowrap; }
+  .hdr__quote { min-height: 44px; padding: 10px 18px; font-size: 0.97rem; }
+  @media (max-width: 960px) { .hdr__nav { display: none; } }
+  @media (max-width: 560px) {
+    .hdr__quote { display: none; }
+    .hdr__tel span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .hdr__tel { width: 44px; justify-content: center; border: 1px solid var(--d-line); border-radius: var(--d-r-btn); }
+  }
+</style>
