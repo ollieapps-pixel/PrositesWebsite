@@ -15,8 +15,8 @@
   --d-accent: #f5a524;
   --d-accent-hover: #e3901a;
   --d-wa: #0f7a40;
-  --d-r-btn: 10px;
-  --d-r-card: 14px;
+  --d-r-btn: 0;
+  --d-r-card: 0;
   --d-shadow: 0 2px 14px rgba(14, 27, 44, 0.06);
   --d-wrap: 1180px;
   --d-gut: 20px;
@@ -42,7 +42,7 @@ p { margin: 0; text-wrap: pretty; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--d-navy); text-underline-offset: 2px; }
 a:hover { color: var(--d-navy-deep); }
-:focus-visible { outline: 3px solid var(--d-accent); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--d-accent); outline-offset: 3px; border-radius: 0; }
 
 .d-wrap { width: min(100% - (var(--d-gut) * 2), var(--d-wrap)); margin-inline: auto; }
 .d-sec { padding-block: var(--d-sec); }
