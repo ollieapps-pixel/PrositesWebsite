@@ -4,9 +4,11 @@
  */
 import type { DemoSite } from './types';
 import { applianceRepair } from './appliance-repair';
+import { plumbing } from './plumbing';
 
 export const demos: Record<string, DemoSite> = {
   [applianceRepair.slug]: applianceRepair,
+  [plumbing.slug]: plumbing,
 };
 
 /** getStaticPaths helper for pages that exist once per industry. */

@@ -70,7 +70,7 @@ const faqs = faqsFor(site, 'areas');
   .ag { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
   .ag__c { display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 14px 16px; background: var(--d-surface); border: 1px solid var(--d-line); border-radius: var(--d-r-card); font-weight: 700; }
   .ag__c--link { padding: 0; border-color: var(--d-navy); }
-  .ag__c--link a { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; align-items: center; width: 100%; min-height: 64px; padding: 12px 16px; color: var(--d-ink); text-decoration: none; }
+  .ag__c--link a { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; align-items: center; width: 100%; min-height: 64px; padding: 12px 16px; border-radius: inherit; color: var(--d-ink); text-decoration: none; }
   .ag__c--link a:hover { background: var(--d-tint); }
   .ag__c--link .ag__more { grid-column: 2; font-size: 0.85rem; font-weight: 700; color: var(--d-navy); text-decoration: underline; }
   @media (max-width: 900px) { .ag { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

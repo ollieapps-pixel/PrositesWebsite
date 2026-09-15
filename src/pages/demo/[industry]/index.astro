@@ -45,6 +45,15 @@ const faqs = faqsFor(site, 'home');
     </div>
   </section>
 
+  {site.emergency && (
+    <section class="emg" aria-label="Emergencies">
+      <div class="d-wrap emg__in">
+        <p><strong>{site.emergency.heading}</strong> {site.emergency.body}</p>
+        <a class="d-btn d-btn--call emg__go" href={site.phoneHref}><Icon name="phone" size={20} stroke="currentColor" />{site.emergency.cta}</a>
+      </div>
+    </section>
+  )}
+
   {site.brands && (
     <section class="brands" aria-label={site.brands.label}>
       <div class="d-wrap brands__in">
@@ -136,6 +145,12 @@ const faqs = faqsFor(site, 'home');
     .hero__copy :global(.trust) { margin-top: 2px; padding-top: 16px; }
   }
 
+  .emg { background: var(--d-navy); color: #fff; }
+  .emg__in { display: flex; align-items: center; justify-content: space-between; gap: 14px 28px; flex-wrap: wrap; padding-block: 18px; }
+  .emg p { font-size: 1.05rem; color: var(--d-on-navy); }
+  .emg strong { color: #fff; }
+  .emg__go { flex-shrink: 0; }
+
   .brands { background: var(--d-surface); border-bottom: 1px solid var(--d-line); }
   .brands__in { display: flex; align-items: center; gap: 12px 32px; flex-wrap: wrap; padding-block: 18px; }
   .brands__l { font-size: 0.9rem; font-weight: 700; color: var(--d-muted); }
@@ -152,7 +167,7 @@ const faqs = faqsFor(site, 'home');
   @media (max-width: 1000px) { .rv { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 
   .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 18px; border-radius: 0; background: var(--d-surface); border: 1px solid var(--d-line); font-weight: 700; color: var(--d-ink-2); text-decoration: none; }
+  .chip { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 18px; border-radius: var(--d-r-pill); background: var(--d-surface); border: 1px solid var(--d-line); font-weight: 700; color: var(--d-ink-2); text-decoration: none; }
   .chip--link { border-color: var(--d-navy); color: var(--d-navy); }
   .chip--link:hover { background: var(--d-navy); color: #fff; }
 

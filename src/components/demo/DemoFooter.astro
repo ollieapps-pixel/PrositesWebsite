@@ -10,7 +10,7 @@ const base = `/demo/${site.slug}`;
   <div class="d-wrap ft__grid">
     <div class="ft__col">
       <Logo site={site} light />
-      <p class="ft__blurb">{site.services.map((s) => s.title.replace(/ repairs?$/i, '').toLowerCase()).slice(0, 4).join(', ')} and more, repaired at your home across {site.region}.</p>
+      <p class="ft__blurb">{site.blurb}</p>
     </div>
     <div class="ft__col">
       <h2 class="ft__h">Pages</h2>

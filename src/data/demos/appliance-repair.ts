@@ -42,6 +42,10 @@ export const applianceRepair: DemoSite = {
   years: 12,
 
   theme: {
+    font: 'manrope',
+    radius: { btn: '0', card: '0', tile: '0', pill: '0', logo: 0 },
+    accentInk: '#0e1b2c',
+    star: '#f5a524',
     navy: '#123a66',
     navyDeep: '#0b2545',
     accent: '#f5a524',
@@ -58,6 +62,8 @@ export const applianceRepair: DemoSite = {
     contact: customer,
     contactAlt: 'Customer booking an appliance repair on her phone',
   },
+
+  blurb: "Fridges, washing machines, ovens, dishwashers and more, repaired at your home across Cape Town's Northern Suburbs.",
 
   trust: [
     { strong: '12 years', span: 'repairing in Cape Town' },

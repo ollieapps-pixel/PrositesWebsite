@@ -32,14 +32,27 @@ export interface DemoSite {
   reviewCount: number;
   years: number;
 
+  /** Visual identity. Colours, typeface and corner style all vary per industry. */
   theme: {
+    font: DemoFont;
+    radius: { btn: string; card: string; tile: string; pill: string; logo: number };
     navy: string;
     navyDeep: string;
     accent: string;
     accentHover: string;
+    /** Text colour on accent buttons: dark on light accents, white on dark ones. */
+    accentInk: string;
+    star: string;
     onNavy: string;
     tint: string;
+    neutrals?: { bg: string; surface: string; ink: string; ink2: string; muted: string; line: string };
   };
+
+  /** One line for the footer, under the logo. */
+  blurb: string;
+
+  /** Optional urgent-help strip under the homepage hero, for trades with emergencies. */
+  emergency?: { heading: string; body: string; cta: string };
 
   images: {
     hero: ImageMetadata;
@@ -108,8 +121,27 @@ export interface DemoSite {
 
 export const areaSlug = (name: string) => name.toLowerCase().replace(/\s+/g, '-');
 
-export const themeStyle = (t: DemoSite['theme']) =>
-  `--d-navy:${t.navy};--d-navy-deep:${t.navyDeep};--d-accent:${t.accent};--d-accent-hover:${t.accentHover};--d-on-navy:${t.onNavy};--d-tint:${t.tint}`;
+/** Typefaces the demo layout loads. Add one here and import it in DemoLayout. */
+export const demoFonts = {
+  manrope: "'Manrope Variable'",
+  rubik: "'Rubik Variable'",
+} as const;
+export type DemoFont = keyof typeof demoFonts;
+
+export const themeStyle = (t: DemoSite['theme']) => {
+  const vars: Record<string, string> = {
+    '--d-font': demoFonts[t.font],
+    '--d-r-btn': t.radius.btn, '--d-r-card': t.radius.card, '--d-r-tile': t.radius.tile, '--d-r-pill': t.radius.pill,
+    '--d-navy': t.navy, '--d-navy-deep': t.navyDeep,
+    '--d-accent': t.accent, '--d-accent-hover': t.accentHover, '--d-accent-ink': t.accentInk,
+    '--d-star': t.star, '--d-on-navy': t.onNavy, '--d-tint': t.tint,
+  };
+  if (t.neutrals) Object.assign(vars, {
+    '--d-bg': t.neutrals.bg, '--d-surface': t.neutrals.surface, '--d-ink': t.neutrals.ink,
+    '--d-ink-2': t.neutrals.ink2, '--d-muted': t.neutrals.muted, '--d-line': t.neutrals.line,
+  });
+  return Object.entries(vars).map(([k, v]) => `${k}:${v}`).join(';');
+};
 
 export const faqsFor = (site: DemoSite, page: 'home' | 'services' | 'areas' | 'contact') =>
   site.faqs.filter((f) => !f.pages || f.pages.includes(page));
