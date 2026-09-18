@@ -8,23 +8,27 @@ export const trustBar = [
 ] as const;
 
 export const problem = {
-  h2: 'Running a Home Service Business Is Harder Than It Should Be',
-  lede: 'Many home service businesses struggle with the chaos of disconnected tools and manual processes:',
+  h2: 'The website brings in the work. The app keeps it organised.',
+  lede: 'One setup gives you a website that brings in enquiries and an app that keeps track of them:',
   bullets: [
-    'Websites that don&rsquo;t bring in enquiries',
-    'Losing track of jobs and customer details',
-    'Managing everything through WhatsApp or notebooks',
-    'No central system for jobs and technicians',
-    'Expensive or complicated software',
+    'Show up when people nearby search for your trade',
+    'A site that works on a phone, with your number one tap away',
+    'Every enquiry in one place, not scattered across WhatsApp, missed calls and Facebook',
+    'Track jobs, customers and technicians from your phone',
+    'One affordable monthly fee, with no complicated software',
   ],
-  close: 'That&rsquo;s why we built a simple system designed specifically for home service businesses.',
 } as const;
 
-export const solution = [
-  'ProSites builds websites and job management software for home service businesses. That&rsquo;s it. Not restaurants, not fashion brands, not startups — plumbers, electricians, appliance repair technicians, geyser specialists, aircon installers and the trades around them.',
-  'Because we build the same type of site every time, we already know what works: where the call button goes, what a customer needs to see before they trust you, and how to make a quote request take fifteen seconds instead of five minutes.',
-  'That means we&rsquo;re faster and cheaper than a traditional agency — and because the site and the app are built together, an enquiry becomes a job on your dashboard without you retyping anything.',
-] as const;
+export const solution = {
+  h2: 'We know what works for home service businesses.',
+  lede: 'Websites and job apps made specifically for home service businesses.',
+  bullets: [
+    'Built only for trades: plumbers, electricians, appliance repair technicians, geyser specialists, aircon installers and the trades around them',
+    'We know where the call button goes and what a customer needs to see before they trust you',
+    'Quote requests take fifteen seconds to fill in, not five minutes',
+    'Faster and cheaper than a traditional agency, because we&rsquo;re not starting from scratch',
+  ],
+} as const;
 
 export const includedWebsite = [
   { icon: 'phone', t: 'Tap-to-Call Button', d: 'Fixed to the bottom of every mobile screen. One tap and the phone rings.' },

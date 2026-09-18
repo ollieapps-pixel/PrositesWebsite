@@ -57,16 +57,16 @@ import avatar from '../assets/placeholder/testimonial.jpg';
     <div class="stack" style="gap:20px">
       <h2>{problem.h2}</h2>
       <p class="lede">{problem.lede}</p>
-      <CheckList items={problem.bullets} tone="cross" />
-      <p><strong set:html={problem.close} /></p>
+      <CheckList items={problem.bullets} />
     </div>
   </section>
 
   <section class="band">
     <div class="sec wrap split">
       <div class="stack" style="gap:20px">
-        <h2>We build one thing, properly.</h2>
-        {solution.map((p) => <p class="lede" set:html={p} />)}
+        <h2>{solution.h2}</h2>
+        <p class="lede">{solution.lede}</p>
+        <CheckList items={solution.bullets} />
         <Button href="/demo/" class="self-start">See the Demo Site</Button>
       </div>
       <Image src={build} alt="Designer laying out a website on a laptop"
@@ -269,7 +269,7 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   .center-text { text-align: center; }
   .center-btns { justify-content: center; }
   .measure { max-width: 76ch; }
-  .self-start { align-self: flex-start; }
+  :global(.self-start) { align-self: flex-start; }
   .self-center { align-self: center; }
 
   .rule { display: flex; align-items: center; gap: 14px; }
