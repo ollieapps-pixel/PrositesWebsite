@@ -31,24 +31,24 @@ export const solution = {
 } as const;
 
 export const includedWebsite = [
-  { icon: 'phone', d: 'Fixed to the bottom of every mobile screen. One tap and the phone rings.' },
-  { icon: 'bubble', d: 'Customers message you the way they already prefer to communicate.' },
-  { icon: 'doc', d: 'Short, simple, and sent straight to your inbox and phone.' },
-  { icon: 'pinDot', d: 'A page for each suburb you cover, so you show up in local searches.' },
-  { icon: 'star', d: 'Properly set up and linked, so you appear on Google Maps when someone searches nearby.' },
-  { icon: 'mobile', d: 'Designed for a customer standing in a flooded kitchen holding their phone.' },
-  { icon: 'bolt', d: 'A slow site loses the call. Yours won&rsquo;t be slow.' },
-  { icon: 'reviews', d: 'Your Google reviews displayed where new customers will see them.' },
-  { icon: 'shield', d: 'We keep it online, secure and backed up. You never touch a server.' },
+  { icon: 'phone', t: 'Tap-to-Call Button', d: 'Fixed to the bottom of every mobile screen. One tap and the phone rings.' },
+  { icon: 'bubble', t: 'WhatsApp Chat', d: 'Customers message you the way they already prefer to communicate.' },
+  { icon: 'doc', t: 'Quote Request Form', d: 'Short, simple, and sent straight to your inbox and phone.' },
+  { icon: 'pinDot', t: 'Service Area Pages', d: 'A page for each suburb you cover, so you show up in local searches.' },
+  { icon: 'star', t: 'Google Business Profile Setup', d: 'Properly set up and linked, so you appear on Google Maps when someone searches nearby.' },
+  { icon: 'mobile', t: 'Built Mobile-First', d: 'Designed for a customer standing in a flooded kitchen holding their phone.' },
+  { icon: 'bolt', t: 'Fast Loading', d: 'A slow site loses the call. Yours won&rsquo;t be slow.' },
+  { icon: 'reviews', t: 'Reviews Section', d: 'Your Google reviews displayed where new customers will see them.' },
+  { icon: 'shield', t: 'Hosting, SSL &amp; Backups', d: 'We keep it online, secure and backed up. You never touch a server.' },
 ] as const;
 
 export const includedApp = [
-  { icon: 'list', d: 'Every job in one list — booked, in progress, done. No more scrolling back through chats.' },
-  { icon: 'user', d: 'Name, number, suburb, address and every job you have ever done for them.' },
-  { icon: 'team', d: 'Assign a job to whoever is closest and see what each of your people is on today.' },
-  { icon: 'history', d: 'What you fixed, what it cost, what you told them. Useful the next time they call.' },
-  { icon: 'inbox', d: 'The quote form on your site opens as a job. Nothing gets retyped and nothing gets missed.' },
-  { icon: 'mobile', d: 'Built to be used standing next to a geyser, not sitting at a desk.' },
+  { icon: 'list', t: 'Job Tracking', d: 'Every job in one list — booked, in progress, done. No more scrolling back through chats.' },
+  { icon: 'user', t: 'Customer Database', d: 'Name, number, suburb, address and every job you have ever done for them.' },
+  { icon: 'team', t: 'Technician Assignments', d: 'Assign a job to whoever is closest and see what each of your people is on today.' },
+  { icon: 'history', t: 'Job History &amp; Notes', d: 'What you fixed, what it cost, what you told them. Useful the next time they call.' },
+  { icon: 'inbox', t: 'Enquiries Land In The App', d: 'The quote form on your site opens as a job. Nothing gets retyped and nothing gets missed.' },
+  { icon: 'mobile', t: 'Works On Your Phone', d: 'Built to be used standing next to a geyser, not sitting at a desk.' },
 ] as const;
 
 export const steps = [
