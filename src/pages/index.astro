@@ -79,26 +79,40 @@ import avatar from '../assets/placeholder/testimonial.jpg';
       <p class="lede">No bloat. No features you&rsquo;ll never use.</p>
     </div>
 
-    <div class="rule"><span class="kicker">On your website</span><i></i></div>
-    <div class="grid g-3">
-      {includedWebsite.map((f) => (
-        <div class="card feat">
-          <Icon name={f.icon} size={30} />
-          <h3 set:html={f.t} />
-          <p class="feat__d" set:html={f.d} />
-        </div>
-      ))}
+    <div class="fsplit">
+      <Ph label="WEBSITE SCREENSHOT — DESKTOP + MOBILE" ratio="4 / 5" class="fsplit__img" />
+      <div class="stack" style="gap:24px">
+        <div class="rule"><span class="kicker">On your website</span><i></i></div>
+        <ul class="flist">
+          {includedWebsite.map((f) => (
+            <li class="flist__i">
+              <Icon name={f.icon} size={26} class="flist__ic" />
+              <div class="stack" style="gap:4px">
+                <h3 class="flist__t" set:html={f.t} />
+                <p class="feat__d" set:html={f.d} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
 
-    <div class="rule"><span class="kicker">In the job app</span><i></i></div>
-    <div class="grid g-3">
-      {includedApp.map((f) => (
-        <div class="card feat">
-          <Icon name={f.icon} size={30} />
-          <h3 set:html={f.t} />
-          <p class="feat__d" set:html={f.d} />
-        </div>
-      ))}
+    <div class="fsplit">
+      <Ph label="JOB APP SCREENSHOT — DASHBOARD" ratio="4 / 5" class="fsplit__img" />
+      <div class="stack" style="gap:24px">
+        <div class="rule"><span class="kicker">In the job app</span><i></i></div>
+        <ul class="flist">
+          {includedApp.map((f) => (
+            <li class="flist__i">
+              <Icon name={f.icon} size={26} class="flist__ic" />
+              <div class="stack" style="gap:4px">
+                <h3 class="flist__t" set:html={f.t} />
+                <p class="feat__d" set:html={f.d} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -298,6 +312,17 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   .rule { display: flex; align-items: center; gap: 14px; }
   .rule i { flex-grow: 1; height: 1px; background: #dde2dc; }
 
+  .fsplit { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
+  .fsplit__img { position: sticky; top: 100px; }
+  .flist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+  .flist__i { display: flex; gap: 16px; align-items: flex-start; }
+  .flist__ic { flex: 0 0 auto; margin-top: 2px; }
+  .flist__t { font-size: 1.0625rem; font-weight: 800; }
+  @media (max-width: 900px) {
+    .fsplit { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    /* Ph sets aspect-ratio inline, so the phone override has to win. */
+    .fsplit__img { position: static; aspect-ratio: 4 / 3 !important; }
+  }
   .feat { padding: 28px 26px; display: flex; flex-direction: column; gap: 14px; }
   .feat h3 { font-size: 1.25rem; font-weight: 800; }
   .feat__d { font-size: 1rem; line-height: 1.55; color: var(--c-muted); }
