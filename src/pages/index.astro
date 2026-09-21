@@ -13,9 +13,9 @@ import { meta, trustBar, problem, solution, includedWebsite, includedApp, steps,
          monthlyApp, monthlyHosting, work, faqs } from '../data/content';
 import { pricing, trades, testimonials } from '../data/site';
 
-import hero from '../assets/placeholder/hero.jpg';
-import searching from '../assets/placeholder/customer-searching.jpg';
-import build from '../assets/placeholder/web-build.jpg';
+import hero from '../assets/hero-plumber-call.webp';
+import searching from '../assets/trade-van-phone.webp';
+import build from '../assets/website-build.webp';
 import jobApp from '../assets/placeholder/job-app.jpg';
 import avatar from '../assets/placeholder/testimonial.jpg';
 ---
@@ -51,7 +51,7 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   </section>
 
   <section class="sec wrap split">
-    <Image src={searching} alt="Woman searching for a local trade on her phone at home"
+    <Image src={searching} alt="Tradesman checking his phone beside his loaded work van"
            widths={[480, 720]} sizes="(max-width: 900px) 100vw, 45vw" class="split__img" />
     <div class="stack" style="gap:20px">
       <h2>{problem.h2}</h2>
@@ -68,7 +68,7 @@ import avatar from '../assets/placeholder/testimonial.jpg';
         <CheckList items={solution.bullets} />
         <Button href="/demo/" class="self-start">See the Demo Site</Button>
       </div>
-      <Image src={build} alt="Designer laying out a website on a laptop"
+      <Image src={build} alt="Designer building a home service website on a laptop"
              widths={[480, 720]} sizes="(max-width: 900px) 100vw, 45vw" class="split__img" />
     </div>
   </section>
