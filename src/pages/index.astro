@@ -124,8 +124,8 @@ import avatar from '../assets/placeholder/testimonial.jpg';
       </div>
       <ol class="steps3">
         {steps.map((s) => (
-          <li class="steps3__i">
-            <div class="card steps3__c">
+          <li class="card steps3__c">
+            <div class="steps3__head">
               <span class="steps3__n">{s.n}</span>
               <h3 class="steps3__s">{s.short}</h3>
               <Icon name={s.icon} size={26} class="steps3__ic" />
@@ -279,23 +279,23 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   .trust__t { font-size: 1.125rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.3; }
 
   .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; align-items: center; }
-  .steps3 { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
-  .steps3__i { display: flex; flex-direction: column; gap: 14px; }
-  .steps3__c { position: relative; display: flex; align-items: center; gap: 14px; padding: 18px 20px; }
+  .steps3 { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px; }
+  .steps3__c { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 24px 26px; }
   .steps3__c::after {
-    content: ''; position: absolute; top: 50%; left: 100%; width: 30px;
+    content: ''; position: absolute; top: 43px; left: 100%; width: 52px;
     border-top: 2px dashed var(--c-orange); opacity: .5;
   }
-  .steps3__i:last-child .steps3__c::after { content: none; }
+  .steps3__c:last-child::after { content: none; }
+  .steps3__head { display: flex; align-items: center; gap: 14px; }
   .steps3__n {
     flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%;
     background: var(--c-orange); color: #fff; font-weight: 700;
     display: grid; place-items: center;
   }
-  .steps3__s { font-size: 1.0625rem; font-weight: 700; color: var(--c-ink); }
+  .steps3__s { font-size: 1.0625rem; font-weight: 800; }
   .steps3__ic { margin-left: auto; }
   @media (max-width: 900px) {
-    .steps3 { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .steps3 { grid-template-columns: minmax(0, 1fr); gap: 20px; }
     .steps3__c::after { content: none; }
   }
   .split__img { border-radius: var(--r-lg); width: 100%; aspect-ratio: 16 / 11; object-fit: cover; }
