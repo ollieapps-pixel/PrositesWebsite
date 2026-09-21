@@ -1,5 +1,5 @@
 /* ProSites design tokens — the "Livery SaaS" system from the design canvas.
-   Petrol/orange/amber carried over from the Livery style tile; surfaces and
+   Deep blue/orange/amber carried over from the Livery style tile; surfaces and
    radii softened for the SaaS layout. */
 
 :root {
@@ -7,8 +7,8 @@
   --c-bg: #f4f5f1;
   --c-surface: #ffffff;
   --c-surface-alt: #edf0ea;
-  --c-petrol: #0a403e;
-  --c-petrol-line: #1c5552;
+  --c-petrol: #0c3b60;
+  --c-petrol-line: #1d5586;
   --c-carbon: #0d100f;
 
   /* ink */
@@ -16,9 +16,9 @@
   --c-ink-2: #3c4a48;
   --c-muted: #4c5a58;
   --c-muted-2: #6a7876;
-  --c-on-dark: #bccfcd;
-  --c-on-dark-2: #9fb8b5;
-  --c-on-dark-3: #e4edec;
+  --c-on-dark: #b9cde0;
+  --c-on-dark-2: #9bb7d1;
+  --c-on-dark-3: #e3ecf4;
   --c-on-carbon: #97a09e;
 
   /* accents */
@@ -40,7 +40,7 @@
   --sh-card: 0 2px 14px rgba(13, 27, 26, 0.05);
   --sh-raised: 0 6px 26px rgba(13, 27, 26, 0.07);
   --sh-orange: 0 6px 18px rgba(232, 93, 12, 0.28);
-  --sh-petrol: 0 14px 40px rgba(10, 64, 62, 0.28);
+  --sh-petrol: 0 14px 40px rgba(12, 59, 96, 0.28);
 
   /* radii */
   --r-sm: 10px;
