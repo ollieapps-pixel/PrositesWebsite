@@ -25,7 +25,7 @@ const quoteHref = current === 'contact' ? '#quote' : `${base}/contact/`;
     </nav>
     <div class="hdr__cta">
       <a class="hdr__tel" href={site.phoneHref}>
-        <Icon name="phone" size={20} stroke="var(--d-navy)" />
+        <Icon name="phone" size={20} stroke="var(--d-icon, var(--d-navy))" />
         <span>{site.phone}</span>
       </a>
       <a class="d-btn d-btn--call hdr__quote" href={quoteHref}>Get a quote</a>

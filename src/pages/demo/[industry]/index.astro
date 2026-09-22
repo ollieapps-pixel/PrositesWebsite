@@ -82,9 +82,11 @@ const faqs = faqsFor(site, 'home');
     </div>
   </section>
 
-  <section class="d-sec d-wrap">
-    <div class="d-head"><h2>How it works</h2></div>
-    <StepsList site={site} />
+  <section class:list={['how', { 'how--dark': site.theme.darkSteps }]}>
+    <div class="d-sec d-wrap">
+      <div class="d-head"><h2>How it works</h2></div>
+      <StepsList site={site} />
+    </div>
   </section>
 
   <section class="d-band" id="reviews">
@@ -144,6 +146,11 @@ const faqs = faqsFor(site, 'home');
     .hero__btns { gap: 10px; }
     .hero__copy :global(.trust) { margin-top: 2px; padding-top: 16px; }
   }
+
+  .how--dark { background: var(--d-navy-deep); color: #fff; }
+  .how--dark :global(h2), .how--dark :global(h3) { color: #fff; }
+  .how--dark :global(.st__i) { border-top-color: var(--d-accent); }
+  .how--dark :global(.st__i p) { color: var(--d-on-navy); }
 
   .emg { background: var(--d-navy); color: #fff; }
   .emg__in { display: flex; align-items: center; justify-content: space-between; gap: 14px 28px; flex-wrap: wrap; padding-block: 18px; }

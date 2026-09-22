@@ -8,7 +8,7 @@ const base = `/demo/${site.slug}`;
 <div class="sg">
   {site.services.map((s) => (
     <article class="sg__c">
-      <span class="sg__ico"><Icon name={s.icon} size={28} stroke="var(--d-navy)" /></span>
+      <span class="sg__ico"><Icon name={s.icon} size={28} stroke="var(--d-icon, var(--d-navy))" /></span>
       <h3>{detailLinks ? <a href={`${base}/services/#${s.id}`}>{s.title}</a> : s.title}</h3>
       <p class="sg__b">{s.short}</p>
       <div class="sg__f">

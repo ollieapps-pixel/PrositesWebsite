@@ -6,7 +6,7 @@ const { items } = Astro.props;
 <div class="rg">
   {items.map((r) => (
     <div class="rg__i">
-      <Icon name={r.icon} size={30} stroke="var(--d-navy)" />
+      <Icon name={r.icon} size={30} stroke="var(--d-icon, var(--d-navy))" />
       <h3>{r.title}</h3>
       <p>{r.body}</p>
     </div>

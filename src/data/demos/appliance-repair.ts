@@ -44,14 +44,16 @@ export const applianceRepair: DemoSite = {
   theme: {
     font: 'manrope',
     radius: { btn: '0', card: '0', tile: '0', pill: '0', logo: 0 },
-    accentInk: '#0e1b2c',
+    accentInk: '#ffffff',
     star: '#f5a524',
-    navy: '#123a66',
-    navyDeep: '#0b2545',
-    accent: '#f5a524',
-    accentHover: '#e3901a',
-    onNavy: '#c9d6e6',
-    tint: '#e9eff6',
+    navy: '#0a5680',
+    navyDeep: '#053c5e',
+    accent: '#a31621',
+    accentHover: '#86111a',
+    onNavy: '#bcd2e0',
+    tint: '#e8eff4',
+    icon: '#a31621',
+    darkSteps: true,
   },
 
   images: {

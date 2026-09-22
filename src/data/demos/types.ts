@@ -45,6 +45,10 @@ export interface DemoSite {
     star: string;
     onNavy: string;
     tint: string;
+    /** Icon stroke. Defaults to `navy` when a demo does not set one. */
+    icon?: string;
+    /** Runs the How it works section as a dark navy band instead of plain. */
+    darkSteps?: boolean;
     neutrals?: { bg: string; surface: string; ink: string; ink2: string; muted: string; line: string };
   };
 
@@ -135,6 +139,7 @@ export const themeStyle = (t: DemoSite['theme']) => {
     '--d-navy': t.navy, '--d-navy-deep': t.navyDeep,
     '--d-accent': t.accent, '--d-accent-hover': t.accentHover, '--d-accent-ink': t.accentInk,
     '--d-star': t.star, '--d-on-navy': t.onNavy, '--d-tint': t.tint,
+    '--d-icon': t.icon ?? t.navy,
   };
   if (t.neutrals) Object.assign(vars, {
     '--d-bg': t.neutrals.bg, '--d-surface': t.neutrals.surface, '--d-ink': t.neutrals.ink,
