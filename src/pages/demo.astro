@@ -10,14 +10,16 @@ import demoMobile from '../assets/demo-ridgeway-mobile.webp';
 import jobAppJobs from '../assets/job-app-jobs.webp';
 import jobAppMobile from '../assets/job-app-mobile.webp';
 import pagespeed from '../assets/pagespeed-ridgeway.webp';
+import demoLong from '../assets/demo-ridgeway-long.webp';
+import Icon from '../components/Icon.astro';
 
 const why = [
-  { t: 'The hero does one job', d: 'Your business name, what you fix, where you work, and a phone number. A customer with a leaking pipe doesn&rsquo;t want to read about your company values — they want to know you cover their suburb and that you&rsquo;ll answer.' },
-  { t: 'The call button never disappears', d: 'On mobile, it&rsquo;s fixed to the bottom of the screen the entire time. The most common reason a service website fails is that finding the number takes too long.' },
-  { t: 'Services are listed in plain language', d: '&ldquo;Blocked drains,&rdquo; not &ldquo;comprehensive drainage solutions.&rdquo; Customers search using the words they&rsquo;d use to describe the problem.' },
-  { t: 'Service areas are spelled out', d: 'Listing your suburbs does two things: it reassures the customer you cover them, and it helps you appear in local searches.' },
-  { t: 'Trust sits above the fold on mobile', d: 'Reviews, years in business, callout guarantees, payment methods. A stranger is about to let you into their home.' },
-  { t: 'The quote form is short', d: 'Name, number, suburb, what&rsquo;s wrong. Every additional field loses enquiries.' },
+  { icon: 'mobile', t: 'The hero does one job', d: 'Your business name, what you fix, where you work, and a phone number. A customer with a leaking pipe doesn&rsquo;t want to read about your company values — they want to know you cover their suburb and that you&rsquo;ll answer.' },
+  { icon: 'phone', t: 'The call button never disappears', d: 'On mobile, it&rsquo;s fixed to the bottom of the screen the entire time. The most common reason a service website fails is that finding the number takes too long.' },
+  { icon: 'list', t: 'Services are listed in plain language', d: '&ldquo;Blocked drains,&rdquo; not &ldquo;comprehensive drainage solutions.&rdquo; Customers search using the words they&rsquo;d use to describe the problem.' },
+  { icon: 'pinDot', t: 'Service areas are spelled out', d: 'Listing your suburbs does two things: it reassures the customer you cover them, and it helps you appear in local searches.' },
+  { icon: 'shield', t: 'Trust sits above the fold on mobile', d: 'Reviews, years in business, callout guarantees, payment methods. A stranger is about to let you into their home.' },
+  { icon: 'doc', t: 'The quote form is short', d: 'Name, number, suburb, what&rsquo;s wrong. Every additional field loses enquiries.' },
 ];
 ---
 
@@ -35,14 +37,26 @@ const why = [
   </section>
 
   <section class="sec wrap stack" style="gap:34px">
-    <h2>Why it&rsquo;s built this way</h2>
-    <div class="grid g-2">
-      {why.map((w) => (
-        <div class="card why">
-          <h3 set:html={w.t} />
-          <p class="lede" set:html={w.d} />
-        </div>
-      ))}
+    <div class="stack" style="gap:12px">
+      <h2>Proven website features that bring you more leads</h2>
+      <p class="lede measure">Every part of this page earns its place. Here is what each one is doing, and why.</p>
+    </div>
+    <div class="wsplit">
+      <div class="wsplit__media">
+        <Image src={demoLong} alt="The demo site on a desktop screen, from the hero down through the services and service areas"
+               widths={[420, 640, 900]} sizes="(max-width: 900px) 100vw, 42vw" class="wsplit__img" />
+      </div>
+      <ul class="wlist">
+        {why.map((w) => (
+          <li class="wlist__i">
+            <Icon name={w.icon} size={26} class="wlist__ic" />
+            <div class="stack" style="gap:4px">
+              <h3 class="wlist__t" set:html={w.t} />
+              <p class="lede" set:html={w.d} />
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
@@ -100,8 +114,23 @@ const why = [
   .phero h1 { color: #fff; text-wrap: balance; }
   .btns { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
   .band { background: var(--c-surface); border-block: 1px solid var(--c-border); }
-  .why { padding: 26px 24px; display: flex; flex-direction: column; gap: 10px; }
-  .why h3 { font-size: 1.1875rem; font-weight: 800; }
+  .wsplit { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 56px; align-items: start; }
+  .wsplit__media { position: sticky; top: 100px; max-height: 78vh; overflow: hidden; border-radius: var(--r-md);
+    border: 1px solid var(--c-border); box-shadow: var(--sh-raised); }
+  /* The page carries on below the crop, so fade the cut rather than slicing it. */
+  .wsplit__media::after {
+    content: ''; position: absolute; inset: auto 0 0 0; height: 90px; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(244, 245, 241, 0), var(--c-bg));
+  }
+  .wsplit__img { display: block; width: 100%; height: auto; }
+  .wlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px; }
+  .wlist__i { display: flex; gap: 16px; align-items: flex-start; }
+  .wlist__ic { flex: 0 0 auto; margin-top: 2px; }
+  .wlist__t { font-size: 1.0625rem; font-weight: 800; }
+  @media (max-width: 900px) {
+    .wsplit { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .wsplit__media { position: static; max-height: 60vh; }
+  }
   .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; align-items: center; }
   @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
   .phone {
