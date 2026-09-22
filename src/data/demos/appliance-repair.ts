@@ -6,8 +6,9 @@
  * register it in ./index.ts.
  */
 import type { DemoSite } from './types';
-import hero from '../../assets/placeholder/hero.jpg';
-import customer from '../../assets/placeholder/customer-searching.jpg';
+import hero from '../../assets/demos/ridgeway-dishwasher.jpg';
+import fridge from '../../assets/demos/ridgeway-fridge.jpg';
+import owner from '../../assets/placeholder/hero.jpg';
 
 const callout = 'R450';
 const guarantee = 90;
@@ -59,11 +60,11 @@ export const applianceRepair: DemoSite = {
 
   images: {
     hero,
-    heroAlt: "Ridgeway technician on a call in a customer's kitchen",
-    owner: hero,
+    heroAlt: "Ridgeway technician repairing a dishwasher in a customer's kitchen",
+    owner,
     ownerAlt: 'Sipho Dlamini, owner of Ridgeway Appliance Repairs',
-    contact: customer,
-    contactAlt: 'Customer booking an appliance repair on her phone',
+    contact: fridge,
+    contactAlt: 'Ridgeway technician working on the back of a fridge',
   },
 
   blurb: "Fridges, washing machines, ovens, dishwashers and more, repaired at your home across Cape Town's Northern Suburbs.",
