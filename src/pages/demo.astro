@@ -7,6 +7,9 @@ import CtaBand from '../components/CtaBand.astro';
 import CallBar from '../components/CallBar.astro';
 import { meta } from '../data/content';
 import jobApp from '../assets/placeholder/job-app.jpg';
+import demoMobile from '../assets/demo-ridgeway-mobile.webp';
+import jobAppJobs from '../assets/job-app-jobs.webp';
+import jobAppMobile from '../assets/job-app-mobile.webp';
 
 const why = [
   { t: 'The hero does one job', d: 'Your business name, what you fix, where you work, and a phone number. A customer with a leaking pipe doesn&rsquo;t want to read about your company values — they want to know you cover their suburb and that you&rsquo;ll answer.' },
@@ -45,7 +48,10 @@ const why = [
 
   <section class="band">
     <div class="sec wrap split">
-      <Ph label="MOBILE MOCKUPS — DEMO SITE ON A PHONE" ratio="4 / 3" />
+      <div class="phone">
+        <Image src={demoMobile} alt="A demo client site on a phone, with the call button fixed to the bottom of the screen"
+               widths={[260, 520]} sizes="(max-width: 900px) 62vw, 280px" />
+      </div>
       <div class="stack" style="gap:18px">
         <h2>On a phone</h2>
         <p class="lede">Most of your customers will find you on a phone, often standing next to the problem. The site is designed for that first and adapted for desktop second.</p>
@@ -68,9 +74,10 @@ const why = [
         <p class="lede">Every enquiry the site takes opens as a job here — with the customer&rsquo;s name, number and suburb already on it. Track it from enquiry to paid, assign it to whoever is closest, and keep the history for the next time they call.</p>
         <p class="lede">It is included in the monthly plan. There is nothing extra to buy and nothing to install.</p>
       </div>
-      <div class="shot">
-        <Image src={jobApp} alt="The ProSites job management dashboard, showing job counts, today's schedule and quick actions"
-               widths={[480, 720, 900]} sizes="(max-width: 900px) 100vw, 45vw" />
+      <div class="appshot">
+        <Image src={jobAppJobs} alt="The job app jobs list on a laptop, showing each job with its number, status and customer"
+               widths={[480, 720, 1100]} sizes="(max-width: 900px) 100vw, 45vw" class="appshot__d" />
+        <Image src={jobAppMobile} alt="The same jobs list on a phone" widths={[170, 340]} sizes="150px" class="appshot__m" />
       </div>
     </div>
   </section>
@@ -93,6 +100,23 @@ const why = [
   .why h3 { font-size: 1.1875rem; font-weight: 800; }
   .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; align-items: center; }
   @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+  .phone {
+    width: min(280px, 62vw); padding: 8px; border-radius: 30px; justify-self: center;
+    background: var(--c-carbon); box-shadow: var(--sh-raised);
+  }
+  .phone :global(img) { width: 100%; height: auto; display: block; border-radius: 23px; }
+
+  .appshot { position: relative; }
+  .appshot__d {
+    display: block; width: 100%; height: auto; border-radius: var(--r-md);
+    border: 1px solid var(--c-border); box-shadow: var(--sh-raised);
+  }
+  .appshot__m {
+    position: absolute; right: -10px; bottom: -26px; width: 150px; height: auto;
+    border-radius: 14px; border: 3px solid #fff; box-shadow: 0 16px 34px rgba(13, 27, 26, 0.22);
+  }
+  @media (max-width: 700px) { .appshot__m { width: 96px; right: -4px; bottom: -14px; border-width: 2px; } }
+
   .shot { background: #fff; border: 1px solid var(--c-border); border-radius: var(--r-lg); padding: 8px; box-shadow: var(--sh-raised); }
   .shot :global(img) { border-radius: 10px; width: 100%; height: auto; }
 </style>
