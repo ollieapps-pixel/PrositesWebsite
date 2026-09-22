@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import Button from '../components/Button.astro';
-import Ph from '../components/Ph.astro';
 import CtaBand from '../components/CtaBand.astro';
 import CallBar from '../components/CallBar.astro';
 import { meta } from '../data/content';
@@ -10,6 +9,7 @@ import jobApp from '../assets/placeholder/job-app.jpg';
 import demoMobile from '../assets/demo-ridgeway-mobile.webp';
 import jobAppJobs from '../assets/job-app-jobs.webp';
 import jobAppMobile from '../assets/job-app-mobile.webp';
+import pagespeed from '../assets/pagespeed-ridgeway.webp';
 
 const why = [
   { t: 'The hero does one job', d: 'Your business name, what you fix, where you work, and a phone number. A customer with a leaking pipe doesn&rsquo;t want to read about your company values — they want to know you cover their suburb and that you&rsquo;ll answer.' },
@@ -63,8 +63,12 @@ const why = [
     <div class="stack" style="gap:18px">
       <h2>Speed</h2>
       <p class="lede">A site that takes five seconds to load loses a third of its visitors before it appears. Ours are built lean.</p>
+      <p class="lede">Google&rsquo;s PageSpeed Insights scores the demo site 100 for performance, 100 for best practices, 100 for SEO and 97 for accessibility.</p>
     </div>
-    <Ph label="PAGESPEED RESULT FOR THE DEMO SITE" ratio="16 / 9" />
+    <div class="shot">
+      <Image src={pagespeed} alt="Google PageSpeed Insights results for the demo site: 100 performance, 97 accessibility, 100 best practices, 100 SEO"
+             widths={[560, 840, 1200]} sizes="(max-width: 900px) 100vw, 45vw" />
+    </div>
   </section>
 
   <section class="band" id="app">
