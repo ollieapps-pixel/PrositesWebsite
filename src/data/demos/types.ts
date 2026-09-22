@@ -51,6 +51,12 @@ export interface DemoSite {
     iconTile?: { bg: string; ink: string };
     /** Runs the How it works section as a dark navy band instead of plain. */
     darkSteps?: boolean;
+    /**
+     * Home page hero layout. 'split' (the default) puts the copy beside the
+     * photo. 'overlay' runs the photo full width with a gradient over the copy
+     * side, so demos for different trades do not share one layout.
+     */
+    heroStyle?: 'split' | 'overlay';
     neutrals?: { bg: string; surface: string; ink: string; ink2: string; muted: string; line: string };
   };
 

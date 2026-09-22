@@ -56,6 +56,7 @@ export const applianceRepair: DemoSite = {
     icon: '#a31621',
     iconTile: { bg: '#a31621', ink: '#ffffff' },
     darkSteps: true,
+    heroStyle: 'overlay',
   },
 
   images: {

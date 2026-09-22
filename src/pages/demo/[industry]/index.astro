@@ -19,6 +19,7 @@ export function getStaticPaths() { return demoPaths(); }
 const { site } = Astro.props as { site: DemoSite };
 const base = `/demo/${site.slug}`;
 const faqs = faqsFor(site, 'home');
+const overlayHero = site.theme.heroStyle === 'overlay';
 ---
 <DemoLayout
   site={site}
@@ -27,7 +28,13 @@ const faqs = faqsFor(site, 'home');
   description={`${site.home.sub} Rated ${site.rating} on Google.`}
   schema={[businessSchema(site, Astro.site, true), faqSchema(faqs)]}
 >
-  <section class="hero">
+  <section class:list={['hero', overlayHero ? 'hero--overlay' : 'hero--split']}>
+    {overlayHero && (
+      <div class="hero__bg">
+        <Image src={site.images.hero} alt={site.images.heroAlt} widths={[900, 1200]}
+               sizes="100vw" loading="eager" fetchpriority="high" />
+      </div>
+    )}
     <div class="d-wrap hero__in">
       <div class="hero__copy">
         <h1>{site.home.h1}</h1>
@@ -38,10 +45,12 @@ const faqs = faqsFor(site, 'home');
         </div>
         <TrustRow site={site} dark />
       </div>
-      <div class="hero__media">
-        <Image src={site.images.hero} alt={site.images.heroAlt} widths={[560, 800, 1100]}
-               sizes="(max-width: 900px) 100vw, 46vw" loading="eager" fetchpriority="high" />
-      </div>
+      {!overlayHero && (
+        <div class="hero__media">
+          <Image src={site.images.hero} alt={site.images.heroAlt} widths={[560, 800, 1100]}
+                 sizes="(max-width: 900px) 100vw, 46vw" loading="eager" fetchpriority="high" />
+        </div>
+      )}
     </div>
   </section>
 
@@ -126,8 +135,21 @@ const faqs = faqsFor(site, 'home');
 </DemoLayout>
 
 <style>
-  .hero { background: var(--d-navy-deep); color: #fff; overflow: hidden; }
-  .hero__in { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-block: 56px; }
+  .hero { background: var(--d-navy-deep); color: #fff; overflow: hidden; position: relative; }
+  .hero--split .hero__in { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-block: 56px; }
+
+  /* Overlay hero: the photo runs full width and the copy sits on a gradient
+     over it, so this demo does not share the split layout. */
+  .hero__bg { position: absolute; inset: 0; }
+  .hero__bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 72% 32%; }
+  .hero--overlay::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg,
+      rgba(5, 60, 94, 0.97) 0%, rgba(5, 60, 94, 0.94) 34%,
+      rgba(5, 60, 94, 0.72) 54%, rgba(5, 60, 94, 0.18) 78%, rgba(5, 60, 94, 0.05) 100%);
+  }
+  .hero--overlay .hero__in { position: relative; z-index: 1; padding-block: 76px; }
+  .hero--overlay .hero__copy { max-width: 620px; }
   .hero__copy { display: flex; flex-direction: column; gap: 22px; }
   .hero h1 { color: #fff; text-wrap: balance; }
   .hero__sub { font-size: 1.2rem; color: var(--d-on-navy); max-width: 44ch; }
@@ -135,8 +157,15 @@ const faqs = faqsFor(site, 'home');
   .hero__copy :global(.trust) { margin-top: 10px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.14); }
   .hero__media :global(img) { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--d-r-card); }
   @media (max-width: 900px) {
-    .hero__in { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 24px 32px; }
+    .hero--split .hero__in { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 24px 32px; }
     .hero__media :global(img) { aspect-ratio: 16 / 10; }
+    /* Phones have no room for a sideways gradient, so scrim the whole photo. */
+    .hero--overlay::after {
+      background: linear-gradient(180deg, rgba(5, 60, 94, 0.72) 0%, rgba(5, 60, 94, 0.88) 45%, rgba(5, 60, 94, 0.95) 100%);
+    }
+    .hero--overlay .hero__bg :global(img) { object-position: 62% center; }
+    .hero--overlay .hero__in { padding-block: 32px 36px; }
+    .hero--overlay .hero__copy { max-width: none; }
   }
   /* Phones: the fixed call bar covers the bottom ~76px, so the whole trust row
      has to land above it on first load. */
