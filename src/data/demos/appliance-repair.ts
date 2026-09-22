@@ -53,6 +53,7 @@ export const applianceRepair: DemoSite = {
     onNavy: '#bcd2e0',
     tint: '#e8eff4',
     icon: '#a31621',
+    iconTile: { bg: '#a31621', ink: '#ffffff' },
     darkSteps: true,
   },
 

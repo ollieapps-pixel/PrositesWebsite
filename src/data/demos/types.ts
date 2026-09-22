@@ -47,6 +47,8 @@ export interface DemoSite {
     tint: string;
     /** Icon stroke. Defaults to `navy` when a demo does not set one. */
     icon?: string;
+    /** Service card icon tile. Defaults to a `tint` tile with an `icon` glyph. */
+    iconTile?: { bg: string; ink: string };
     /** Runs the How it works section as a dark navy band instead of plain. */
     darkSteps?: boolean;
     neutrals?: { bg: string; surface: string; ink: string; ink2: string; muted: string; line: string };
@@ -140,6 +142,7 @@ export const themeStyle = (t: DemoSite['theme']) => {
     '--d-accent': t.accent, '--d-accent-hover': t.accentHover, '--d-accent-ink': t.accentInk,
     '--d-star': t.star, '--d-on-navy': t.onNavy, '--d-tint': t.tint,
     '--d-icon': t.icon ?? t.navy,
+    ...(t.iconTile ? { '--d-icon-tile-bg': t.iconTile.bg, '--d-icon-tile-ink': t.iconTile.ink } : {}),
   };
   if (t.neutrals) Object.assign(vars, {
     '--d-bg': t.neutrals.bg, '--d-surface': t.neutrals.surface, '--d-ink': t.neutrals.ink,
