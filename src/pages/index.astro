@@ -308,7 +308,7 @@ import avatar from '../assets/placeholder/testimonial.jpg';
     display: grid; place-items: center;
   }
   .steps3__s { font-size: 1.0625rem; font-weight: 800; }
-  .steps3__ic { margin-left: auto; }
+  .steps3__head :global(svg) { margin-left: auto; flex: 0 0 auto; }
   @media (max-width: 900px) {
     .steps3 { grid-template-columns: minmax(0, 1fr); gap: 20px; }
     .steps3__c::after { content: none; }
@@ -349,7 +349,9 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   }
   .flist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
   .flist__i { display: flex; gap: 16px; align-items: flex-start; }
-  .flist__ic { flex: 0 0 auto; margin-top: 2px; }
+  /* Global: an icon's root element belongs to its own component, so a
+     scoped class selector never matches it. */
+  .flist__i :global(svg) { flex: 0 0 auto; margin-top: 2px; }
   .flist__t { font-size: 1.0625rem; font-weight: 800; }
   @media (max-width: 900px) {
     .fsplit { grid-template-columns: minmax(0, 1fr); gap: 28px; }

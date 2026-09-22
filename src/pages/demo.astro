@@ -49,7 +49,7 @@ const why = [
       <ul class="wlist">
         {why.map((w) => (
           <li class="wlist__i">
-            <Icon name={w.icon} size={26} class="wlist__ic" />
+            <Icon name={w.icon} size={34} class="wlist__ic" />
             <div class="stack" style="gap:4px">
               <h3 class="wlist__t" set:html={w.t} />
               <p class="lede" set:html={w.d} />
@@ -115,7 +115,7 @@ const why = [
   .btns { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
   .band { background: var(--c-surface); border-block: 1px solid var(--c-border); }
   .wsplit { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 56px; align-items: start; }
-  .wsplit__media { position: sticky; top: 100px; max-height: 78vh; overflow: hidden; border-radius: var(--r-md);
+  .wsplit__media { position: relative; max-height: 78vh; overflow: hidden; border-radius: var(--r-md);
     border: 1px solid var(--c-border); box-shadow: var(--sh-raised); }
   /* The page carries on below the crop, so fade the cut rather than slicing it. */
   .wsplit__media::after {
@@ -125,11 +125,13 @@ const why = [
   .wsplit__img { display: block; width: 100%; height: auto; }
   .wlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px; }
   .wlist__i { display: flex; gap: 16px; align-items: flex-start; }
-  .wlist__ic { flex: 0 0 auto; margin-top: 2px; }
+  /* One box for every glyph, so the list reads down a single edge. The
+     selector has to be global: the icon's root sits in its own component. */
+  .wlist__i :global(svg) { flex: 0 0 auto; width: 34px; height: 34px; margin-top: 1px; }
   .wlist__t { font-size: 1.0625rem; font-weight: 800; }
   @media (max-width: 900px) {
     .wsplit { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-    .wsplit__media { position: static; max-height: 60vh; }
+    .wsplit__media { max-height: 60vh; }
   }
   .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; align-items: center; }
   @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
