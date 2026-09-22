@@ -82,7 +82,12 @@ import avatar from '../assets/placeholder/testimonial.jpg';
     </div>
 
     <div class="fsplit">
-      <Ph label="WEBSITE SCREENSHOT — DESKTOP + MOBILE" ratio="4 / 5" class="fsplit__img" />
+      <div class="fsplit__media">
+        <div class="phone">
+          <Image src={demoMobile} alt="A demo client site on a phone, with the call button fixed to the bottom of the screen"
+                 widths={[260, 520]} sizes="(max-width: 900px) 62vw, 280px" />
+        </div>
+      </div>
       <div class="stack" style="gap:24px">
         <div class="rule"><span class="kicker">On your website</span><i></i></div>
         <ul class="flist">
@@ -100,7 +105,10 @@ import avatar from '../assets/placeholder/testimonial.jpg';
     </div>
 
     <div class="fsplit">
-      <Ph label="JOB APP SCREENSHOT — DASHBOARD" ratio="4 / 5" class="fsplit__img" />
+      <div class="fsplit__media">
+        <Image src={jobApp} alt="The job app dashboard, showing job counts, today's schedule and quick actions"
+               widths={[480, 720, 900]} sizes="(max-width: 900px) 100vw, 45vw" class="fsplit__app" />
+      </div>
       <div class="stack" style="gap:24px">
         <div class="rule"><span class="kicker">In the job app</span><i></i></div>
         <ul class="flist">
@@ -334,15 +342,23 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   .rule i { flex-grow: 1; height: 1px; background: #dfe3e8; }
 
   .fsplit { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
-  .fsplit__img { position: sticky; top: 100px; }
+  .fsplit__media { position: sticky; top: 100px; display: flex; justify-content: center; }
+  .phone {
+    width: min(280px, 62vw); padding: 8px; border-radius: 30px;
+    background: var(--c-carbon); box-shadow: var(--sh-raised);
+  }
+  .phone :global(img) { width: 100%; height: auto; display: block; border-radius: 23px; }
+  .fsplit__app {
+    width: 100%; height: auto; border-radius: var(--r-md);
+    border: 1px solid var(--c-border); box-shadow: var(--sh-raised);
+  }
   .flist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
   .flist__i { display: flex; gap: 16px; align-items: flex-start; }
   .flist__ic { flex: 0 0 auto; margin-top: 2px; }
   .flist__t { font-size: 1.0625rem; font-weight: 800; }
   @media (max-width: 900px) {
     .fsplit { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-    /* Ph sets aspect-ratio inline, so the phone override has to win. */
-    .fsplit__img { position: static; aspect-ratio: 4 / 3 !important; }
+    .fsplit__media { position: static; }
   }
   .feat { padding: 28px 26px; display: flex; flex-direction: column; gap: 14px; }
   .feat h3 { font-size: 1.25rem; font-weight: 800; }
