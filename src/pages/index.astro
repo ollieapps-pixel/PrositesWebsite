@@ -17,6 +17,8 @@ import hero from '../assets/hero-plumber-call.webp';
 import searching from '../assets/trade-van-phone.webp';
 import build from '../assets/website-build.webp';
 import jobApp from '../assets/placeholder/job-app.jpg';
+import demoDesktop from '../assets/demo-ridgeway-desktop.webp';
+import demoMobile from '../assets/demo-ridgeway-mobile.webp';
 import avatar from '../assets/placeholder/testimonial.jpg';
 ---
 
@@ -150,7 +152,12 @@ import avatar from '../assets/placeholder/testimonial.jpg';
         <Button href="/demo/">View the Website Demo</Button>
         <Button href="/demo/#app" variant="onDark">Preview the Job App</Button>
       </div>
-      <Ph label="DEMO SCREENSHOT — DESKTOP + MOBILE" ratio="900 / 380" dark class="demo-shot" />
+      <div class="demoshot">
+        <Image src={demoDesktop} alt="The Ridgeway Appliance Repairs demo site on a desktop screen"
+               widths={[700, 1100, 1600]} sizes="(max-width: 940px) 100vw, 900px" class="demoshot__d" />
+        <Image src={demoMobile} alt="The same demo site on a phone"
+               widths={[190, 380]} sizes="190px" class="demoshot__m" />
+      </div>
     </div>
   </section>
 
@@ -301,6 +308,20 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   .split__img { border-radius: var(--r-lg); width: 100%; aspect-ratio: 16 / 11; object-fit: cover; }
   @media (max-width: 900px) { .split { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
 
+  .demoshot { position: relative; width: min(100%, 900px); margin: 4px auto 30px; }
+  .demoshot__d {
+    display: block; width: 100%; height: auto; border-radius: var(--r-md);
+    border: 1px solid rgba(255, 255, 255, 0.16); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+  }
+  .demoshot__m {
+    position: absolute; right: -8px; bottom: -30px; width: 172px; height: auto;
+    border-radius: 14px; border: 3px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  }
+  @media (max-width: 700px) {
+    .demoshot { margin-bottom: 18px; }
+    .demoshot__m { width: 104px; right: -4px; bottom: -16px; border-width: 2px; }
+  }
   .band { background: var(--c-surface); border-block: 1px solid var(--c-border); }
   .center { align-items: center; text-align: center; }
   .center-text { text-align: center; }
@@ -328,7 +349,6 @@ import avatar from '../assets/placeholder/testimonial.jpg';
   .feat__d { font-size: 1rem; line-height: 1.55; color: var(--c-muted); }
 
   .squiggle { max-width: 100%; }
-  .demo-shot { max-width: 900px; }
 
   .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; list-style: none; margin: 0; padding: 0; max-width: 1000px; }
   .chip { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-pill); font-size: 1rem; font-weight: 600; padding: 10px 18px; color: #2c3742; }
